@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 2.5 Flash Lite 图片/视频推理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .model-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+            border-radius: 12px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .model-selector label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .model-selector select {
+            padding: 10px 20px;
+            font-size: 15px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            min-width: 220px;
+            transition: all 0.3s ease;
+        }
+        
+        .model-selector select:hover {
+            border-color: #764ba2;
+        }
+        
+        .model-selector select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+        }
+        
+        /* 模式切换标签 */
+        .mode-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #667eea;
+        }
+        
+        .mode-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: white;
+            color: #667eea;
+        }
+        
+        .mode-tab:hover {
+            background: #f0f2ff;
+        }
+        
+        .mode-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .mode-tab .icon {
+            margin-right: 8px;
+        }
+        
+        /* 模式内容区域 */
+        .mode-content {
+            display: none;
+        }
+        
+        .mode-content.active {
+            display: block;
+        }
+        
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+        
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .preview-container {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .preview-container.show {
+            display: block;
+        }
+        
+        .preview-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .image-preview, .video-preview {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .file-info {
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .settings-section {
+            display: none;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .settings-section.show {
+            display: block;
+        }
+        
+        .settings-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .settings-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .settings-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .input-group label {
+            color: #666;
+            font-size: 14px;
+            min-width: 80px;
+        }
+        
+        .input-group input, .input-group select {
+            width: 120px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-group span {
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .settings-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        .radio-label {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-label:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .radio-label input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .radio-label input[type="radio"]:checked + .radio-text {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .radio-label:has(input[type="radio"]:checked) {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+        
+        .radio-text {
+            font-size: 15px;
+            color: #333;
+        }
+        
+        .radio-desc {
+            font-size: 12px;
+            color: #888;
+            width: 100%;
+            margin-left: 30px;
+        }
+        
+        .frames-settings {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .preview-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .preview-btn:hover {
+            background: #218838;
+        }
+        
+        .preview-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .resized-preview-container {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .resized-preview-container.show {
+            display: block;
+        }
+        
+        .resized-preview-container h5 {
+            margin-bottom: 10px;
+            color: #2e7d32;
+            font-size: 14px;
+        }
+        
+        .resized-preview-container img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .resized-info {
+            text-align: center;
+            margin-top: 10px;
+            color: #2e7d32;
+            font-size: 13px;
+        }
+        
+        .prompt-section {
+            margin-bottom: 20px;
+        }
+        
+        .prompt-section label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .prompt-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 80px;
+            transition: border-color 0.3s;
+        }
+        
+        .prompt-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .result-section.show {
+            display: block;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .token-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .token-box {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .token-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .token-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        /* 详细 Token 信息样式 */
+        .token-details-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .token-details-section h5 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .token-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .token-detail-card {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .token-detail-card h6 {
+            font-size: 13px;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .token-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #e8ebff;
+        }
+        
+        .token-detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .token-detail-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .token-detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .token-detail-value.highlight {
+            color: #667eea;
+        }
+        
+        .token-detail-value.thinking {
+            color: #ff9800;
+        }
+        
+        .token-detail-value.tool {
+            color: #4caf50;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-box h5 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .info-box p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .frames-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .frames-preview img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .processed-media-section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .processed-media-section h5 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .processed-media-section img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .response-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .error-message {
+            background: #fff0f0;
+            border: 1px solid #ffcccc;
+            color: #cc0000;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Gemini 图片/视频推理</h1>
+        <p class="subtitle">上传图片或视频，使用 Gemini AI 进行分析</p>
+        
+        <!-- 模型选择 -->
+        <div class="model-selector">
+            <label for="modelSelect">🤖 选择模型:</label>
+            <select id="modelSelect">
+                <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite</option>
+                <option value="gemini-2.0-flash-lite-001">Gemini 2.0 Flash Lite</option>
+                <option value="gemini-3-pro-preview">Gemini 3 Pro Preview</option>
+                <option value="gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+            </select>
+        </div>
+        
+        <!-- 媒体分辨率设置（图片和视频模式都显示） -->
+        <div class="settings-section show" id="mediaResolutionSettings">
+            <h4>📊 媒体分辨率设置</h4>
+            
+            <!-- Media Resolution -->
+            <div class="settings-row">
+                <div class="input-group">
+                    <label for="mediaResolutionSelect">分辨率:</label>
+                    <select id="mediaResolutionSelect" style="width: 200px;">
+                        <option value="unspecified">默认 (自动)</option>
+                        <option value="low">Low (低分辨率，省 tokens)</option>
+                        <option value="medium">Medium (中等分辨率)</option>
+                        <option value="high">High (高分辨率)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <p class="settings-info" id="mediaResolutionInfo">
+                💡 <strong>分辨率设置</strong>: 影响图片/视频的处理精度和 token 消耗。<br>
+                📊 视频: Low ~100 tokens/秒，默认 ~300 tokens/秒。<br>
+                🖼️ 图片: 低分辨率可减少 token 消耗，高分辨率可获得更多细节。
+            </p>
+        </div>
+        
+        <!-- 视频高级设置（仅视频模式下显示） -->
+        <div class="settings-section" id="videoAdvancedSettings" style="display: none;">
+            <h4>🎬 视频处理高级设置</h4>
+            
+            <!-- Video FPS (仅视频模式) -->
+            <div class="settings-row">
+                <div class="input-group">
+                    <label for="videoFpsInput">采样帧率:</label>
+                    <input type="number" id="videoFpsInput" value="1" min="0.1" max="24" step="0.1" style="width: 80px;">
+                    <span>fps (0.1-24)</span>
+                </div>
+            </div>
+            
+            <!-- Video Clip (Start/End Offset) -->
+            <div class="settings-row">
+                <div class="input-group">
+                    <label for="startOffsetInput">起始时间:</label>
+                    <input type="text" id="startOffsetInput" placeholder="0s" style="width: 100px;">
+                    <span>秒</span>
+                </div>
+                <div class="input-group">
+                    <label for="endOffsetInput">结束时间:</label>
+                    <input type="text" id="endOffsetInput" placeholder="留空=全部" style="width: 100px;">
+                    <span>秒</span>
+                </div>
+            </div>
+            
+            <p class="settings-info">
+                💡 <strong>采样帧率</strong>: 默认 1 fps，最高 24 fps。更高帧率捕捉更多细节但消耗更多 tokens。<br>
+                ⏱️ <strong>时间裁剪</strong>: 可指定分析视频的起始和结束时间（秒），留空则分析整个视频。
+            </p>
+        </div>
+        
+        <!-- 模式切换标签 -->
+        <div class="mode-tabs">
+            <div class="mode-tab active" data-mode="image">
+                <span class="icon">🖼️</span>图片分析
+            </div>
+            <div class="mode-tab" data-mode="video">
+                <span class="icon">🎬</span>视频分析
+            </div>
+        </div>
+        
+        <!-- 图片模式 -->
+        <div class="mode-content active" id="imageMode">
+            <div class="upload-area" id="imageUploadArea">
+                <div class="upload-icon">📁</div>
+                <p class="upload-text">点击或拖拽图片到此处上传</p>
+                <p class="upload-text" style="font-size: 12px; color: #999; margin-top: 10px;">支持 JPG, PNG, GIF, WebP 格式</p>
+            </div>
+            <input type="file" class="file-input" id="imageFileInput" accept="image/*">
+            
+            <div class="preview-container" id="imagePreviewContainer">
+                <p class="preview-title">📷 原始图片预览</p>
+                <img class="image-preview" id="imagePreview" src="" alt="预览图片">
+                <p class="file-info" id="imageInfo"></p>
+            </div>
+            
+            <div class="settings-section" id="imageSettings">
+                <h4>📐 调整图片尺寸</h4>
+                <div class="settings-row">
+                    <div class="input-group">
+                        <label for="widthInput">宽度:</label>
+                        <input type="number" id="widthInput" placeholder="宽度" min="1" max="4096">
+                        <span>px</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="heightInput">高度:</label>
+                        <input type="number" id="heightInput" placeholder="高度" min="1" max="4096">
+                        <span>px</span>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="keepRatio" checked>
+                        <label for="keepRatio">保持宽高比</label>
+                    </div>
+                </div>
+                <p class="settings-info" id="resizeInfo">留空则使用原始尺寸</p>
+                <button class="preview-btn" id="previewResizeBtn">👁️ 预览调整后的图片</button>
+                
+                <div class="resized-preview-container" id="resizedPreviewContainer">
+                    <h5>✅ 调整后的图片预览</h5>
+                    <img id="resizedImagePreview" src="" alt="调整后的图片">
+                    <p class="resized-info" id="resizedInfo"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 视频模式 -->
+        <div class="mode-content" id="videoMode">
+            <div class="upload-area" id="videoUploadArea">
+                <div class="upload-icon">🎬</div>
+                <p class="upload-text">点击或拖拽视频到此处上传</p>
+                <p class="upload-text" style="font-size: 12px; color: #999; margin-top: 10px;">支持 MP4, WebM, MOV, TS 格式，最大 100MB</p>
+            </div>
+            <input type="file" class="file-input" id="videoFileInput" accept="video/*,.ts,.TS">
+            
+            <div class="preview-container" id="videoPreviewContainer">
+                <p class="preview-title">🎬 视频预览</p>
+                <video class="video-preview" id="videoPreview" controls></video>
+                <p class="file-info" id="videoInfo"></p>
+            </div>
+            
+            <div class="settings-section" id="videoSettings">
+                <h4>⚙️ 视频处理设置</h4>
+                
+                <!-- 处理模式选择 -->
+                <div class="settings-row">
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="videoMode" value="direct" id="modeDirectRadio" checked>
+                            <span class="radio-text">🎬 直接发送视频</span>
+                            <span class="radio-desc">将完整视频直接发送给 Gemini（推荐）</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="videoMode" value="frames" id="modeFramesRadio">
+                            <span class="radio-text">🖼️ 提取帧模式</span>
+                            <span class="radio-desc">从视频中提取帧图片后发送</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- 帧提取设置（仅在提取帧模式下显示） -->
+                <div class="frames-settings" id="framesSettings" style="display: none;">
+                    <div class="settings-row">
+                        <div class="input-group">
+                            <label for="fpsInput">提取帧率:</label>
+                            <input type="number" id="fpsInput" value="1" min="0.1" max="30" step="0.1">
+                            <span>fps</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="maxFramesInput">最大帧数:</label>
+                            <input type="number" id="maxFramesInput" value="30" min="1" max="60">
+                            <span>帧</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 帧尺寸调整 -->
+                    <div class="settings-row" style="margin-top: 15px;">
+                        <div class="input-group">
+                            <label for="frameWidthInput">帧宽度:</label>
+                            <input type="number" id="frameWidthInput" placeholder="自动" min="1" max="4096">
+                            <span>px</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="frameHeightInput">帧高度:</label>
+                            <input type="number" id="frameHeightInput" placeholder="自动" min="1" max="4096">
+                            <span>px</span>
+                        </div>
+                    </div>
+                    
+                    <p class="settings-info">
+                        💡 提示：FPS=1 表示每秒提取1帧，FPS=0.5 表示每2秒提取1帧。<br>
+                        帧尺寸留空则使用原始尺寸，只填一个则按比例缩放。较小的帧尺寸可减少Token消耗。
+                    </p>
+                </div>
+                
+                <p class="settings-info" id="directModeInfo">
+                    💡 直接发送模式：视频将完整发送给 Gemini，支持更好的时序理解。<br>
+                    📊 Token 计算：默认分辨率 ~300 tokens/秒，低分辨率 ~100 tokens/秒<br>
+                    ⏱️ 2M 上下文窗口可处理：默认 2小时 / 低分辨率 6小时
+                </p>
+            </div>
+        </div>
+        
+        <div class="prompt-section">
+            <label for="promptInput">提示词 (Prompt)</label>
+            <textarea class="prompt-input" id="promptInput" placeholder="请描述您想让 AI 分析的内容">请描述这个内容</textarea>
+        </div>
+        
+        <button class="submit-btn" id="submitBtn" disabled>提交分析</button>
+        <button class="submit-btn" id="submitLangchainBtn" disabled style="margin-top: 10px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">🔗 使用 LangChain 分析 (media_resolution=medium)</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p id="loadingText">正在分析中，请稍候...</p>
+        </div>
+        
+        <div class="error-message" id="errorMessage"></div>
+        
+        <div class="result-section" id="resultSection">
+            <h3 class="result-title">📊 分析结果</h3>
+            <div class="token-info">
+                <div class="token-box">
+                    <div class="token-label">Input Tokens</div>
+                    <div class="token-value" id="inputTokens">-</div>
+                </div>
+                <div class="token-box">
+                    <div class="token-label">Output Tokens</div>
+                    <div class="token-value" id="outputTokens">-</div>
+                </div>
+                <div class="token-box">
+                    <div class="token-label">Total Tokens</div>
+                    <div class="token-value" id="totalTokens">-</div>
+                </div>
+            </div>
+            
+            <!-- 详细 Token 信息 -->
+            <div class="token-details-section" id="tokenDetailsSection" style="display: none;">
+                <h5>📊 Token 详细信息</h5>
+                <div class="token-details-grid">
+                    <!-- Input Token 详情 -->
+                    <div class="token-detail-card">
+                        <h6>📥 Input Tokens 详情</h6>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">📝 Text</span>
+                            <span class="token-detail-value" id="inputTextTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🖼️ Image</span>
+                            <span class="token-detail-value highlight" id="inputImageTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🎬 Video</span>
+                            <span class="token-detail-value highlight" id="inputVideoTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🔊 Audio</span>
+                            <span class="token-detail-value" id="inputAudioTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">💾 Cached</span>
+                            <span class="token-detail-value" id="inputCachedTokens">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Output Token 详情 -->
+                    <div class="token-detail-card">
+                        <h6>📤 Output Tokens 详情</h6>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">📝 Text</span>
+                            <span class="token-detail-value" id="outputTextTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🖼️ Image</span>
+                            <span class="token-detail-value" id="outputImageTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🎬 Video</span>
+                            <span class="token-detail-value" id="outputVideoTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🔊 Audio</span>
+                            <span class="token-detail-value" id="outputAudioTokens">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 特殊 Token 详情 -->
+                    <div class="token-detail-card">
+                        <h6>⚡ 特殊 Tokens</h6>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🧠 Thinking</span>
+                            <span class="token-detail-value thinking" id="thinkingTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">🔧 Tool Use</span>
+                            <span class="token-detail-value tool" id="toolUseTokens">0</span>
+                        </div>
+                        <div class="token-detail-item">
+                            <span class="token-detail-label">💾 Cached Content</span>
+                            <span class="token-detail-value" id="cachedContentTokens">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图片结果信息 -->
+            <div class="info-box" id="imageSizeInfo" style="display: none;">
+                <h5>📏 图片尺寸信息</h5>
+                <p id="originalSizeText">原始尺寸: -</p>
+                <p id="processedSizeText">处理后尺寸: -</p>
+                <p id="resizedText">是否调整: -</p>
+            </div>
+            
+            <!-- 视频结果信息 -->
+            <div class="info-box" id="videoResultInfo" style="display: none;">
+                <h5>🎬 视频信息</h5>
+                <p id="videoDimensionsText">视频尺寸: -</p>
+                <p id="videoDurationText">视频时长: -</p>
+                <p id="videoOriginalFpsText">原始帧率: -</p>
+                <p id="videoExtractFpsText">提取帧率: -</p>
+                <p id="framesExtractedText">提取帧数: -</p>
+            </div>
+            
+            <!-- 处理后的图片 -->
+            <div class="processed-media-section" id="processedImageSection" style="display: none;">
+                <h5>🖼️ 发送给 Gemini 的图片</h5>
+                <img id="processedImageResult" src="" alt="处理后的图片">
+            </div>
+            
+            <!-- 视频帧预览 -->
+            <div class="processed-media-section" id="framesPreviewSection" style="display: none;">
+                <h5>🎞️ 提取的视频帧预览（前6帧）</h5>
+                <div class="frames-preview" id="framesPreview"></div>
+            </div>
+            
+            <h4 style="margin-bottom: 10px; color: #333;">AI 响应内容：</h4>
+            <div class="response-content" id="responseContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        // 模式切换
+        const modeTabs = document.querySelectorAll('.mode-tab');
+        const modeContents = document.querySelectorAll('.mode-content');
+        let currentMode = 'image';
+        
+        modeTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const mode = tab.dataset.mode;
+                currentMode = mode;
+                
+                modeTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                modeContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === mode + 'Mode') {
+                        content.classList.add('active');
+                    }
+                });
+                
+                // 更新提示词
+                if (mode === 'image') {
+                    document.getElementById('promptInput').placeholder = '请描述您想让 AI 分析的内容，例如：请描述这张图片的内容';
+                } else {
+                    document.getElementById('promptInput').placeholder = '请描述您想让 AI 分析的内容，例如：请描述这个视频的内容';
+                }
+                
+                // 重置提交按钮状态
+                updateSubmitButton();
+                
+                // 更新 Media Resolution 显示
+                updateMediaResolutionVisibility();
+            });
+        });
+        
+        // 图片相关变量
+        const imageUploadArea = document.getElementById('imageUploadArea');
+        const imageFileInput = document.getElementById('imageFileInput');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageInfo = document.getElementById('imageInfo');
+        const imageSettings = document.getElementById('imageSettings');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const keepRatio = document.getElementById('keepRatio');
+        const resizeInfo = document.getElementById('resizeInfo');
+        const previewResizeBtn = document.getElementById('previewResizeBtn');
+        const resizedPreviewContainer = document.getElementById('resizedPreviewContainer');
+        const resizedImagePreview = document.getElementById('resizedImagePreview');
+        const resizedInfoText = document.getElementById('resizedInfo');
+        
+        let selectedImageFile = null;
+        let originalWidth = 0;
+        let originalHeight = 0;
+        let aspectRatio = 1;
+        let originalImageData = null;
+        
+        // 视频相关变量
+        const videoUploadArea = document.getElementById('videoUploadArea');
+        const videoFileInput = document.getElementById('videoFileInput');
+        const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+        const videoPreview = document.getElementById('videoPreview');
+        const videoInfo = document.getElementById('videoInfo');
+        const videoSettings = document.getElementById('videoSettings');
+        const fpsInput = document.getElementById('fpsInput');
+        const maxFramesInput = document.getElementById('maxFramesInput');
+        const modeDirectRadio = document.getElementById('modeDirectRadio');
+        const modeFramesRadio = document.getElementById('modeFramesRadio');
+        const framesSettings = document.getElementById('framesSettings');
+        const directModeInfo = document.getElementById('directModeInfo');
+        const frameWidthInput = document.getElementById('frameWidthInput');
+        const frameHeightInput = document.getElementById('frameHeightInput');
+        
+        let selectedVideoFile = null;
+        
+        // 视频模式切换
+        modeDirectRadio.addEventListener('change', () => {
+            if (modeDirectRadio.checked) {
+                framesSettings.style.display = 'none';
+                directModeInfo.style.display = 'block';
+            }
+        });
+        
+        modeFramesRadio.addEventListener('change', () => {
+            if (modeFramesRadio.checked) {
+                framesSettings.style.display = 'block';
+                directModeInfo.style.display = 'none';
+            }
+        });
+        
+        // 通用变量
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const loadingText = document.getElementById('loadingText');
+        const resultSection = document.getElementById('resultSection');
+        const errorMessage = document.getElementById('errorMessage');
+        const modelSelect = document.getElementById('modelSelect');
+        const mediaResolutionSelector = document.getElementById('mediaResolutionSelector');
+        const mediaResolutionSelect = document.getElementById('mediaResolutionSelect');
+        
+        // 视频高级设置元素
+        const videoAdvancedSettings = document.getElementById('videoAdvancedSettings');
+        const videoFpsInput = document.getElementById('videoFpsInput');
+        const startOffsetInput = document.getElementById('startOffsetInput');
+        const endOffsetInput = document.getElementById('endOffsetInput');
+        
+        // 更新视频高级设置显示状态
+        function updateMediaResolutionVisibility() {
+            // 视频模式下显示高级设置
+            if (currentMode === 'video') {
+                videoAdvancedSettings.style.display = 'block';
+                videoAdvancedSettings.classList.add('show');
+            } else {
+                videoAdvancedSettings.style.display = 'none';
+                videoAdvancedSettings.classList.remove('show');
+            }
+        }
+        
+        // 模型选择变化时
+        modelSelect.addEventListener('change', () => {
+            updateMediaResolutionVisibility();
+        });
+        
+        // 图片上传事件
+        imageUploadArea.addEventListener('click', () => imageFileInput.click());
+        
+        imageUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.add('dragover');
+        });
+        
+        imageUploadArea.addEventListener('dragleave', () => {
+            imageUploadArea.classList.remove('dragover');
+        });
+        
+        imageUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleImageFile(files[0]);
+            }
+        });
+        
+        imageFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleImageFile(e.target.files[0]);
+            }
+        });
+        
+        // 视频上传事件
+        videoUploadArea.addEventListener('click', () => videoFileInput.click());
+        
+        videoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            videoUploadArea.classList.add('dragover');
+        });
+        
+        videoUploadArea.addEventListener('dragleave', () => {
+            videoUploadArea.classList.remove('dragover');
+        });
+        
+        videoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            videoUploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleVideoFile(files[0]);
+            }
+        });
+        
+        videoFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleVideoFile(e.target.files[0]);
+            }
+        });
+        
+        function handleImageFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showError('请选择图片文件');
+                return;
+            }
+            
+            selectedImageFile = file;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImageData = e.target.result;
+                imagePreview.src = originalImageData;
+                imagePreviewContainer.classList.add('show');
+                imageSettings.classList.add('show');
+                resizedPreviewContainer.classList.remove('show');
+                
+                const img = new Image();
+                img.onload = () => {
+                    originalWidth = img.width;
+                    originalHeight = img.height;
+                    aspectRatio = originalWidth / originalHeight;
+                    
+                    imageInfo.textContent = `文件名: ${file.name} | 尺寸: ${img.width} x ${img.height} | 大小: ${formatFileSize(file.size)}`;
+                    
+                    widthInput.value = originalWidth;
+                    heightInput.value = originalHeight;
+                    widthInput.placeholder = originalWidth;
+                    heightInput.placeholder = originalHeight;
+                    
+                    updateResizeInfo();
+                };
+                img.src = originalImageData;
+            };
+            reader.readAsDataURL(file);
+            
+            updateSubmitButton();
+            hideError();
+        }
+        
+        function handleVideoFile(file) {
+            // Check if it's a video file by MIME type or file extension
+            const fileName = file.name.toLowerCase();
+            const isVideoByType = file.type.startsWith('video/');
+            const isVideoByExtension = fileName.endsWith('.mp4') || fileName.endsWith('.webm') || 
+                                        fileName.endsWith('.mov') || fileName.endsWith('.avi') || 
+                                        fileName.endsWith('.ts') || fileName.endsWith('.mkv') ||
+                                        fileName.endsWith('.m2ts') || fileName.endsWith('.mts');
+            
+            if (!isVideoByType && !isVideoByExtension) {
+                showError('请选择视频文件（支持 MP4, WebM, MOV, TS 格式）');
+                return;
+            }
+            
+            const fileSizeMB = file.size / (1024 * 1024);
+            if (fileSizeMB > 100) {
+                showError('视频文件过大，请上传小于 100MB 的视频');
+                return;
+            }
+            
+            selectedVideoFile = file;
+            
+            const url = URL.createObjectURL(file);
+            videoPreview.src = url;
+            videoPreviewContainer.classList.add('show');
+            videoSettings.classList.add('show');
+            
+            videoPreview.onloadedmetadata = () => {
+                const duration = videoPreview.duration;
+                const width = videoPreview.videoWidth;
+                const height = videoPreview.videoHeight;
+                
+                videoInfo.textContent = `文件名: ${file.name} | 尺寸: ${width} x ${height} | 时长: ${duration.toFixed(2)}秒 | 大小: ${formatFileSize(file.size)}`;
+            };
+            
+            updateSubmitButton();
+            hideError();
+        }
+        
+        function updateSubmitButton() {
+            if (currentMode === 'image') {
+                submitBtn.disabled = !selectedImageFile;
+            } else {
+                submitBtn.disabled = !selectedVideoFile;
+            }
+        }
+        
+        // 宽度输入变化时
+        widthInput.addEventListener('input', () => {
+            if (keepRatio.checked && widthInput.value) {
+                const newWidth = parseInt(widthInput.value);
+                if (!isNaN(newWidth) && newWidth > 0) {
+                    heightInput.value = Math.round(newWidth / aspectRatio);
+                }
+            }
+            updateResizeInfo();
+            resizedPreviewContainer.classList.remove('show');
+        });
+        
+        // 高度输入变化时
+        heightInput.addEventListener('input', () => {
+            if (keepRatio.checked && heightInput.value) {
+                const newHeight = parseInt(heightInput.value);
+                if (!isNaN(newHeight) && newHeight > 0) {
+                    widthInput.value = Math.round(newHeight * aspectRatio);
+                }
+            }
+            updateResizeInfo();
+            resizedPreviewContainer.classList.remove('show');
+        });
+        
+        // 保持宽高比复选框变化
+        keepRatio.addEventListener('change', () => {
+            if (keepRatio.checked && widthInput.value) {
+                const newWidth = parseInt(widthInput.value);
+                if (!isNaN(newWidth) && newWidth > 0) {
+                    heightInput.value = Math.round(newWidth / aspectRatio);
+                }
+            }
+            updateResizeInfo();
+        });
+        
+        function updateResizeInfo() {
+            const targetWidth = parseInt(widthInput.value) || originalWidth;
+            const targetHeight = parseInt(heightInput.value) || originalHeight;
+            
+            if (targetWidth === originalWidth && targetHeight === originalHeight) {
+                resizeInfo.textContent = '将使用原始尺寸';
+            } else {
+                resizeInfo.textContent = `将调整为 ${targetWidth} x ${targetHeight} 像素`;
+            }
+        }
+        
+        // 预览调整后的图片
+        previewResizeBtn.addEventListener('click', () => {
+            if (!originalImageData) {
+                showError('请先上传图片');
+                return;
+            }
+            
+            const targetWidth = parseInt(widthInput.value) || originalWidth;
+            const targetHeight = parseInt(heightInput.value) || originalHeight;
+            
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+                
+                const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+                resizedImagePreview.src = resizedDataUrl;
+                resizedInfoText.textContent = `调整后尺寸: ${targetWidth} x ${targetHeight} 像素`;
+                resizedPreviewContainer.classList.add('show');
+            };
+            img.src = originalImageData;
+        });
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+        
+        // 提交分析
+        submitBtn.addEventListener('click', async () => {
+            const prompt = document.getElementById('promptInput').value.trim();
+            if (!prompt) {
+                showError('请输入提示词');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            loading.classList.add('show');
+            resultSection.classList.remove('show');
+            hideError();
+            
+            try {
+                if (currentMode === 'image') {
+                    await analyzeImage(prompt);
+                } else {
+                    await analyzeVideo(prompt);
+                }
+            } catch (error) {
+                showError('请求失败: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                loading.classList.remove('show');
+            }
+        });
+        
+        async function analyzeImage(prompt) {
+            if (!selectedImageFile) {
+                showError('请先选择图片');
+                return;
+            }
+            
+            loadingText.textContent = '正在分析图片，请稍候...';
+            
+            const formData = new FormData();
+            formData.append('image', selectedImageFile);
+            formData.append('prompt', prompt);
+            formData.append('model_id', modelSelect.value);
+            
+            // 添加 media_resolution 参数（所有模型都支持）
+            formData.append('media_resolution', mediaResolutionSelect.value);
+            
+            const targetWidth = parseInt(widthInput.value);
+            const targetHeight = parseInt(heightInput.value);
+            
+            if (!isNaN(targetWidth) && targetWidth > 0) {
+                formData.append('target_width', targetWidth);
+            }
+            if (!isNaN(targetHeight) && targetHeight > 0) {
+                formData.append('target_height', targetHeight);
+            }
+            
+            const response = await fetch('/api/analyze', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                showError(data.error);
+            } else {
+                displayImageResult(data);
+            }
+        }
+        
+        async function analyzeVideo(prompt) {
+            if (!selectedVideoFile) {
+                showError('请先选择视频');
+                return;
+            }
+            
+            const videoMode = modeDirectRadio.checked ? 'direct' : 'frames';
+            
+            if (videoMode === 'direct') {
+                loadingText.textContent = '正在发送视频给 Gemini 分析，请稍候...';
+            } else {
+                loadingText.textContent = '正在提取视频帧并分析，请稍候...';
+            }
+            
+            const formData = new FormData();
+            formData.append('video', selectedVideoFile);
+            formData.append('prompt', prompt);
+            formData.append('mode', videoMode);
+            formData.append('model_id', modelSelect.value);
+            
+            // 添加视频高级设置参数（直接发送视频模式）
+            if (videoMode === 'direct') {
+                formData.append('media_resolution', mediaResolutionSelect.value);
+                
+                // 添加视频 FPS
+                const videoFps = parseFloat(videoFpsInput.value);
+                if (!isNaN(videoFps) && videoFps > 0 && videoFps <= 24) {
+                    formData.append('video_fps', videoFps);
+                }
+                
+                // 添加起始时间
+                const startOffset = startOffsetInput.value.trim();
+                if (startOffset) {
+                    // 确保格式正确（添加 's' 后缀如果没有）
+                    const startValue = startOffset.endsWith('s') ? startOffset : startOffset + 's';
+                    formData.append('start_offset', startValue);
+                }
+                
+                // 添加结束时间
+                const endOffset = endOffsetInput.value.trim();
+                if (endOffset) {
+                    const endValue = endOffset.endsWith('s') ? endOffset : endOffset + 's';
+                    formData.append('end_offset', endValue);
+                }
+            }
+            
+            if (videoMode === 'frames') {
+                formData.append('fps', fpsInput.value || '1');
+                formData.append('max_frames', maxFramesInput.value || '30');
+                
+                // 添加帧尺寸参数
+                if (frameWidthInput.value) {
+                    formData.append('frame_width', frameWidthInput.value);
+                }
+                if (frameHeightInput.value) {
+                    formData.append('frame_height', frameHeightInput.value);
+                }
+            }
+            
+            const response = await fetch('/api/analyze_video', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                showError(data.error);
+            } else {
+                displayVideoResult(data);
+            }
+        }
+        
+        function displayTokenDetails(tokenDetails) {
+            if (!tokenDetails) {
+                document.getElementById('tokenDetailsSection').style.display = 'none';
+                return;
+            }
+            
+            // Input tokens 详情
+            const promptDetails = tokenDetails.prompt_tokens_details || {};
+            document.getElementById('inputTextTokens').textContent = promptDetails.text_tokens || 0;
+            document.getElementById('inputImageTokens').textContent = promptDetails.image_tokens || 0;
+            document.getElementById('inputVideoTokens').textContent = promptDetails.video_tokens || 0;
+            document.getElementById('inputAudioTokens').textContent = promptDetails.audio_tokens || 0;
+            document.getElementById('inputCachedTokens').textContent = promptDetails.cached_tokens || 0;
+            
+            // Output tokens 详情
+            const candidatesDetails = tokenDetails.candidates_tokens_details || {};
+            document.getElementById('outputTextTokens').textContent = candidatesDetails.text_tokens || 0;
+            document.getElementById('outputImageTokens').textContent = candidatesDetails.image_tokens || 0;
+            document.getElementById('outputVideoTokens').textContent = candidatesDetails.video_tokens || 0;
+            document.getElementById('outputAudioTokens').textContent = candidatesDetails.audio_tokens || 0;
+            
+            // 特殊 tokens
+            document.getElementById('thinkingTokens').textContent = candidatesDetails.thinking_tokens || 0;
+            document.getElementById('toolUseTokens').textContent = candidatesDetails.tool_use_tokens || 0;
+            document.getElementById('cachedContentTokens').textContent = tokenDetails.cached_content_token_count || 0;
+            
+            document.getElementById('tokenDetailsSection').style.display = 'block';
+        }
+        
+        function displayImageResult(data) {
+            document.getElementById('inputTokens').textContent = data.input_tokens || '-';
+            document.getElementById('outputTokens').textContent = data.output_tokens || '-';
+            document.getElementById('totalTokens').textContent = data.total_tokens || '-';
+            document.getElementById('responseContent').textContent = data.response || '无响应内容';
+            
+            // 显示详细 token 信息
+            displayTokenDetails(data.token_details);
+            
+            // 显示图片尺寸信息
+            document.getElementById('imageSizeInfo').style.display = 'block';
+            document.getElementById('videoResultInfo').style.display = 'none';
+            
+            if (data.image_info) {
+                document.getElementById('originalSizeText').textContent = `原始尺寸: ${data.image_info.original_size}`;
+                document.getElementById('processedSizeText').textContent = `处理后尺寸: ${data.image_info.processed_size}`;
+                document.getElementById('resizedText').textContent = `是否调整: ${data.image_info.resized ? '是' : '否'}`;
+            }
+            
+            // 显示处理后的图片
+            if (data.processed_image_base64) {
+                document.getElementById('processedImageResult').src = 'data:image/jpeg;base64,' + data.processed_image_base64;
+                document.getElementById('processedImageSection').style.display = 'block';
+            } else {
+                document.getElementById('processedImageSection').style.display = 'none';
+            }
+            
+            document.getElementById('framesPreviewSection').style.display = 'none';
+            resultSection.classList.add('show');
+        }
+        
+        function displayVideoResult(data) {
+            document.getElementById('inputTokens').textContent = data.input_tokens || '-';
+            document.getElementById('outputTokens').textContent = data.output_tokens || '-';
+            document.getElementById('totalTokens').textContent = data.total_tokens || '-';
+            document.getElementById('responseContent').textContent = data.response || '无响应内容';
+            
+            // 显示详细 token 信息
+            displayTokenDetails(data.token_details);
+            
+            // 显示视频信息
+            document.getElementById('imageSizeInfo').style.display = 'none';
+            document.getElementById('videoResultInfo').style.display = 'block';
+            
+            if (data.video_info) {
+                document.getElementById('videoDimensionsText').textContent = `视频尺寸: ${data.video_info.width} x ${data.video_info.height}`;
+                document.getElementById('videoDurationText').textContent = `视频时长: ${data.video_info.duration} 秒`;
+                document.getElementById('videoOriginalFpsText').textContent = `原始帧率: ${data.video_info.original_fps} fps`;
+                
+                // 根据模式显示不同信息
+                if (data.video_info.mode === 'direct') {
+                    let directInfo = `处理模式: 直接发送视频`;
+                    if (data.video_info.video_fps) {
+                        directInfo += ` | 采样帧率: ${data.video_info.video_fps} fps`;
+                    }
+                    if (data.video_info.media_resolution) {
+                        directInfo += ` | 分辨率: ${data.video_info.media_resolution}`;
+                    }
+                    document.getElementById('videoExtractFpsText').textContent = directInfo;
+                    
+                    let clipInfo = '';
+                    if (data.video_info.start_offset || data.video_info.end_offset) {
+                        clipInfo = `时间裁剪: ${data.video_info.start_offset || '0s'} - ${data.video_info.end_offset || '结束'}`;
+                    }
+                    document.getElementById('framesExtractedText').textContent = clipInfo;
+                } else {
+                    let extractInfo = `提取帧率: ${data.video_info.extract_fps} fps`;
+                    if (data.video_info.frame_size) {
+                        extractInfo += ` | 帧尺寸: ${data.video_info.frame_size}`;
+                    }
+                    document.getElementById('videoExtractFpsText').textContent = extractInfo;
+                    document.getElementById('framesExtractedText').textContent = `提取帧数: ${data.video_info.frames_extracted} 帧`;
+                }
+            }
+            
+            // 显示帧预览
+            document.getElementById('processedImageSection').style.display = 'none';
+            
+            if (data.frames_preview && data.frames_preview.length > 0) {
+                const framesPreview = document.getElementById('framesPreview');
+                framesPreview.innerHTML = '';
+                data.frames_preview.forEach((frameBase64, index) => {
+                    const img = document.createElement('img');
+                    img.src = 'data:image/jpeg;base64,' + frameBase64;
+                    img.alt = `帧 ${index + 1}`;
+                    img.title = `帧 ${index + 1}`;
+                    framesPreview.appendChild(img);
+                });
+                document.getElementById('framesPreviewSection').style.display = 'block';
+            } else {
+                document.getElementById('framesPreviewSection').style.display = 'none';
+            }
+            
+            resultSection.classList.add('show');
+        }
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+        }
+        
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+        
+        // LangChain 按钮
+        const submitLangchainBtn = document.getElementById('submitLangchainBtn');
+        
+        // 更新 LangChain 按钮状态
+        function updateLangchainButton() {
+            if (currentMode === 'image') {
+                submitLangchainBtn.disabled = !selectedImageFile;
+                submitLangchainBtn.style.display = 'block';
+            } else {
+                submitLangchainBtn.style.display = 'none';
+            }
+        }
+        
+        // 修改 updateSubmitButton 函数
+        const originalUpdateSubmitButton = updateSubmitButton;
+        updateSubmitButton = function() {
+            if (currentMode === 'image') {
+                submitBtn.disabled = !selectedImageFile;
+                submitLangchainBtn.disabled = !selectedImageFile;
+                submitLangchainBtn.style.display = 'block';
+            } else {
+                submitBtn.disabled = !selectedVideoFile;
+                submitLangchainBtn.style.display = 'none';
+            }
+        };
+        
+        // LangChain 分析
+        submitLangchainBtn.addEventListener('click', async () => {
+            const prompt = document.getElementById('promptInput').value.trim();
+            if (!prompt) {
+                showError('请输入提示词');
+                return;
+            }
+            
+            if (!selectedImageFile) {
+                showError('请先选择图片');
+                return;
+            }
+            
+            submitLangchainBtn.disabled = true;
+            submitBtn.disabled = true;
+            loading.classList.add('show');
+            resultSection.classList.remove('show');
+            hideError();
+            
+            loadingText.textContent = '正在使用 LangChain ChatVertexAI 分析图片 (media_resolution=medium)...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('image', selectedImageFile);
+                formData.append('prompt', prompt);
+                formData.append('model_id', modelSelect.value);
+                formData.append('media_resolution', 'medium');  // 固定使用 medium
+                
+                const response = await fetch('/api/analyze_langchain', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showError(data.error);
+                } else {
+                    displayLangchainResult(data);
+                }
+            } catch (error) {
+                showError('请求失败: ' + error.message);
+            } finally {
+                submitLangchainBtn.disabled = false;
+                submitBtn.disabled = false;
+                loading.classList.remove('show');
+            }
+        });
+        
+        function displayLangchainResult(data) {
+            document.getElementById('inputTokens').textContent = data.input_tokens || '-';
+            document.getElementById('outputTokens').textContent = data.output_tokens || '-';
+            document.getElementById('totalTokens').textContent = data.total_tokens || '-';
+            document.getElementById('responseContent').textContent = data.response || '无响应内容';
+            
+            // 隐藏详细 token 信息（LangChain 返回格式不同）
+            document.getElementById('tokenDetailsSection').style.display = 'none';
+            
+            // 显示 LangChain 信息
+            document.getElementById('imageSizeInfo').style.display = 'block';
+            document.getElementById('videoResultInfo').style.display = 'none';
+            
+            document.getElementById('originalSizeText').textContent = `框架: ${data.framework || 'langchain'}`;
+            document.getElementById('processedSizeText').textContent = `Media Resolution: ${data.media_resolution || 'medium'}`;
+            document.getElementById('resizedText').textContent = `Generation Config: ${JSON.stringify(data.generation_config || {})}`;
+            
+            document.getElementById('processedImageSection').style.display = 'none';
+            document.getElementById('framesPreviewSection').style.display = 'none';
+            resultSection.classList.add('show');
+        }
+        
+        // 初始化 LangChain 按钮状态
+        updateSubmitButton();
+    </script>
+</body>
+</html>
