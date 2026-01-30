@@ -2,6 +2,11 @@ flask>=3.0.0
 flask-cors>=4.0.0
 Pillow>=10.0.0
 google-genai>=1.0.0
+google-cloud-storage>=2.14.0
 langchain>=0.3.0
 langchain-google-vertexai>=2.0.0
 opencv-python-headless>=4.8.0
+# InsightFace 人脸识别
+insightface>=0.7.3
+onnxruntime>=1.16.0
+numpy>=1.24.0

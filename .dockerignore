@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# 测试视频（太大）
+Video/
+*.mp4
+*.ts
+*.mov
+
+# 临时文件
+*.log
+*.tmp
+
+# 保留 face_db 结构但不包含数据
+face_db/embeddings/*.npy
+
+# 标注视频输出
+labeled_videos/*.mp4

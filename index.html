@@ -672,6 +672,770 @@
         .error-message.show {
             display: block;
         }
+        
+        /* 人脸识别模式样式 */
+        .face-management-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .face-management-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .register-face-area {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .register-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+        }
+        
+        .register-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+        }
+        
+        .register-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .registered-faces-area {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .registered-faces-area h5 {
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .refresh-btn {
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+        }
+        
+        .faces-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .face-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0f2ff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .face-item .face-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .face-item .face-count {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .face-item .delete-face-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .face-item .delete-face-btn:hover {
+            background: #c82333;
+        }
+        
+        .no-faces-text {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .face-recognition-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .face-recognition-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .face-recognition-settings {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .face-result-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .face-result-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .face-summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .face-summary-box p {
+            margin: 0;
+        }
+        
+        .face-details-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .face-details-box h5 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .face-details-list {
+            font-size: 14px;
+        }
+        
+        .face-detail-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .face-detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .face-detail-item .time {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .face-detail-item .name {
+            font-weight: 600;
+        }
+        
+        .face-detail-item .name.recognized {
+            color: #28a745;
+        }
+        
+        .face-detail-item .name.unknown {
+            color: #dc3545;
+        }
+        
+        .face-detail-item .similarity {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .gemini-analysis-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .gemini-analysis-box h5 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .gemini-analysis-content {
+            white-space: pre-wrap;
+            font-size: 14px;
+            color: #555;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .processing-time-box {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #2e7d32;
+        }
+        
+        /* 相似度统计样式 */
+        .similarity-stats-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .similarity-stats-box h5 {
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .similarity-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .similarity-stat-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+            border: 1px solid #e0e5ff;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .similarity-stat-card .person-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .similarity-stat-card .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+        
+        .similarity-stat-card .stat-label {
+            color: #666;
+        }
+        
+        .similarity-stat-card .stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .similarity-stat-card .stat-value.high {
+            color: #28a745;
+        }
+        
+        .similarity-stat-card .stat-value.medium {
+            color: #ffc107;
+        }
+        
+        .similarity-stat-card .stat-value.low {
+            color: #dc3545;
+        }
+        
+        .similarity-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .similarity-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* 标注帧图片展示样式 */
+        .annotated-frames-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .annotated-frames-box h5 {
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .annotated-frames-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        
+        .annotated-frame-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #e0e5ff;
+        }
+        
+        .annotated-frame-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+        
+        .annotated-frame-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .annotated-frame-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px 8px 8px;
+            font-size: 12px;
+        }
+        
+        .annotated-frame-info .frame-time {
+            font-weight: 600;
+        }
+        
+        .annotated-frame-info .frame-stats {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        
+        .annotated-frame-info .stat-recognized {
+            color: #4ade80;
+        }
+        
+        .annotated-frame-info .stat-stranger {
+            color: #f87171;
+        }
+        
+        /* 图片放大模态框样式 */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-modal.show {
+            display: flex;
+        }
+        
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: color 0.2s;
+        }
+        
+        .image-modal-close:hover {
+            color: #ff6b6b;
+        }
+        
+        .image-modal-img {
+            max-width: 100%;
+            max-height: calc(90vh - 60px);
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .image-modal-info {
+            text-align: center;
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        
+        .image-modal-info .info-recognized {
+            color: #4ade80;
+            font-weight: 600;
+        }
+        
+        .image-modal-info .info-stranger {
+            color: #f87171;
+            font-weight: 600;
+        }
+        
+        /* 视频标注模式样式 */
+        .label-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e5ff;
+        }
+        
+        .label-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .add-person-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .person-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-person-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-person-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .add-person-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .persons-list-area {
+            margin-top: 15px;
+        }
+        
+        .persons-list-area h5 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .persons-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .person-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+        
+        .person-item .person-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .person-item .remove-person-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .person-item .remove-person-btn:hover {
+            background: #c82333;
+        }
+        
+        .no-persons-text {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .label-settings {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .label-stats {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .label-stats p {
+            margin: 5px 0;
+            color: #333;
+        }
+        
+        .download-area {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        .processing-time {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 实时标注模式样式 */
+        .realtime-section {
+            background: #f0fff4;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #c6f6d5;
+        }
+        
+        .realtime-section h4 {
+            margin-bottom: 15px;
+            color: #276749;
+            font-size: 18px;
+        }
+        
+        .realtime-settings {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .realtime-preview-section {
+            background: #1a1a2e;
+            border: 1px solid #16213e;
+        }
+        
+        .realtime-preview-section h4 {
+            color: #eee;
+        }
+        
+        .realtime-display {
+            background: #000;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .realtime-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .realtime-faces-list {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .realtime-face-tag {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .realtime-face-tag.recognized {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .realtime-face-tag.unknown {
+            background: #ecc94b;
+            color: #744210;
+        }
+        
+        .realtime-complete-section {
+            background: #f0fff4;
+            border: 2px solid #48bb78;
+        }
+        
+        .realtime-stats {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .realtime-stats p {
+            margin: 8px 0;
+            color: #333;
+        }
+        
+        .realtime-progress {
+            margin-bottom: 15px;
+        }
+        
+        /* 弹出框样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -754,6 +1518,21 @@
             </div>
             <div class="mode-tab" data-mode="video">
                 <span class="icon">🎬</span>视频分析
+            </div>
+            <div class="mode-tab" data-mode="face">
+                <span class="icon">👤</span>人脸识别
+            </div>
+            <div class="mode-tab" data-mode="label">
+                <span class="icon">📹</span>视频标注
+            </div>
+            <div class="mode-tab" data-mode="realtime">
+                <span class="icon">🎥</span>实时标注
+            </div>
+            <div class="mode-tab" data-mode="cache">
+                <span class="icon">📦</span>视频Cache
+            </div>
+            <div class="mode-tab" data-mode="stranger">
+                <span class="icon">🕵️</span>陌生人检测
             </div>
         </div>
         
@@ -875,6 +1654,724 @@
                     📊 Token 计算：默认分辨率 ~300 tokens/秒，低分辨率 ~100 tokens/秒<br>
                     ⏱️ 2M 上下文窗口可处理：默认 2小时 / 低分辨率 6小时
                 </p>
+            </div>
+        </div>
+        
+        <!-- 人脸识别模式 -->
+        <div class="mode-content" id="faceMode">
+            <!-- 户主管理区域 -->
+            <div class="face-management-section">
+                <h4>👥 户主管理</h4>
+                
+                <!-- 注册新户主 -->
+                <div class="register-face-area">
+                    <div class="upload-area" id="faceUploadArea" style="padding: 20px;">
+                        <div class="upload-icon" style="font-size: 32px;">📷</div>
+                        <p class="upload-text">点击或拖拽户主照片到此处</p>
+                        <p class="upload-text" style="font-size: 12px; color: #999;">请上传包含清晰人脸的照片</p>
+                    </div>
+                    <input type="file" class="file-input" id="faceImageInput" accept="image/*">
+                    
+                    <div class="face-preview-container" id="facePreviewContainer" style="display: none;">
+                        <img id="facePreview" src="" alt="户主照片预览" style="max-width: 200px; max-height: 200px; border-radius: 10px; margin: 10px auto; display: block;">
+                    </div>
+                    
+                    <div class="input-group" style="margin-top: 15px; justify-content: center;">
+                        <label for="faceNameInput">户主姓名:</label>
+                        <input type="text" id="faceNameInput" placeholder="请输入姓名" style="width: 180px;">
+                        <button class="register-btn" id="registerFaceBtn" disabled>注册户主</button>
+                    </div>
+                </div>
+                
+                <!-- 已注册户主列表 -->
+                <div class="registered-faces-area">
+                    <h5>📋 已注册户主 <button class="refresh-btn" id="refreshFacesBtn">🔄 刷新</button></h5>
+                    <div class="faces-list" id="facesList">
+                        <p class="no-faces-text">暂无已注册户主</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 视频人脸识别区域 -->
+            <div class="face-recognition-section">
+                <h4>🎬 视频人脸识别</h4>
+                
+                <div class="upload-area" id="faceVideoUploadArea">
+                    <div class="upload-icon">🎬</div>
+                    <p class="upload-text">点击或拖拽视频到此处上传</p>
+                    <p class="upload-text" style="font-size: 12px; color: #999;">支持 MP4, WebM, MOV, TS 格式</p>
+                </div>
+                <input type="file" class="file-input" id="faceVideoInput" accept="video/*,.ts,.TS">
+                
+                <div class="preview-container" id="faceVideoPreviewContainer" style="display: none;">
+                    <video class="video-preview" id="faceVideoPreview" controls style="max-height: 300px;"></video>
+                    <p class="file-info" id="faceVideoInfo"></p>
+                </div>
+                
+                <div class="face-recognition-settings">
+                    <div class="settings-row">
+                        <div class="input-group">
+                            <label for="faceRecFpsInput">分析帧率:</label>
+                            <input type="number" id="faceRecFpsInput" value="1" min="0.5" max="5" step="0.5" style="width: 80px;">
+                            <span>fps</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="faceRecMaxFramesInput">最大帧数:</label>
+                            <input type="number" id="faceRecMaxFramesInput" value="30" min="5" max="60" style="width: 80px;">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="useGeminiCheckbox">
+                            <label for="useGeminiCheckbox">结合 Gemini 场景分析</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" id="startFaceRecBtn" disabled style="margin-top: 15px;">🔍 开始人脸识别</button>
+            </div>
+            
+            <!-- 人脸识别结果区域 -->
+            <div class="face-result-section" id="faceResultSection" style="display: none;">
+                <h4>📊 识别结果</h4>
+                
+                <div class="face-summary-box" id="faceSummaryBox">
+                    <p id="faceSummaryText">-</p>
+                </div>
+                
+                <!-- 相似度统计 -->
+                <div class="similarity-stats-box" id="similarityStatsBox" style="display: none;">
+                    <h5>📈 相似度统计</h5>
+                    <div class="similarity-stats-grid" id="similarityStatsGrid"></div>
+                </div>
+                
+                <!-- 标注帧图片展示 -->
+                <div class="annotated-frames-box" id="annotatedFramesBox" style="display: none;">
+                    <h5>🖼️ 检测结果预览（点击放大）</h5>
+                    <div class="annotated-frames-grid" id="annotatedFramesGrid"></div>
+                </div>
+                
+                <div class="face-details-box">
+                    <h5>📋 详细识别记录</h5>
+                    <div class="face-details-list" id="faceDetailsList"></div>
+                </div>
+                
+                <div class="gemini-analysis-box" id="geminiAnalysisBox" style="display: none;">
+                    <h5>🤖 Gemini 场景分析</h5>
+                    <div class="gemini-analysis-content" id="geminiAnalysisContent"></div>
+                </div>
+                
+                <div class="processing-time-box" id="faceProcessingTimeBox">
+                    <p id="faceProcessingTimeText">-</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 视频标注模式 -->
+        <div class="mode-content" id="labelMode">
+            <!-- 添加标注人物 -->
+            <div class="label-section">
+                <h4>👥 添加标注人物</h4>
+                <div class="add-person-area">
+                    <div class="upload-area" id="labelPersonUploadArea" style="padding: 15px; display: inline-block; width: auto; min-width: 150px;">
+                        <div class="upload-icon" style="font-size: 24px;">📷</div>
+                        <p class="upload-text" style="font-size: 12px;">点击上传照片</p>
+                    </div>
+                    <input type="file" class="file-input" id="labelPersonImageInput" accept="image/*">
+                    
+                    <div class="person-input-group">
+                        <img id="labelPersonPreview" src="" alt="" style="display: none; width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        <input type="text" id="labelPersonNameInput" placeholder="输入英文名字 (如: Tom)" style="width: 150px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        <button class="add-person-btn" id="addLabelPersonBtn" disabled>添加</button>
+                    </div>
+                </div>
+                
+                <div class="persons-list-area">
+                    <h5>已添加人物：<span id="labelPersonCount">0</span> 人</h5>
+                    <div class="persons-list" id="labelPersonsList">
+                        <p class="no-persons-text">暂未添加人物</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上传视频 -->
+            <div class="label-section">
+                <h4>🎬 上传视频</h4>
+                <div class="upload-area" id="labelVideoUploadArea">
+                    <div class="upload-icon">🎬</div>
+                    <p class="upload-text">点击或拖拽视频到此处上传</p>
+                    <p class="upload-text" style="font-size: 12px; color: #999;">支持 MP4, WebM, MOV 格式</p>
+                </div>
+                <input type="file" class="file-input" id="labelVideoInput" accept="video/*,.mp4,.webm,.mov">
+                
+                <div class="preview-container" id="labelVideoPreviewContainer" style="display: none;">
+                    <video class="video-preview" id="labelVideoPreview" controls style="max-height: 250px;"></video>
+                    <p class="file-info" id="labelVideoInfo"></p>
+                </div>
+            </div>
+            
+            <!-- 标注设置 -->
+            <div class="label-section">
+                <h4>⚙️ 标注设置</h4>
+                <div class="label-settings">
+                    <div class="input-group">
+                        <label for="labelThresholdInput">相似度阈值:</label>
+                        <input type="number" id="labelThresholdInput" value="70" min="50" max="95" style="width: 80px;">
+                        <span>%</span>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="labelShowUnknownCheckbox" checked>
+                        <label for="labelShowUnknownCheckbox">显示未识别人脸 (Unknown)</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" id="startLabelBtn" disabled style="margin-top: 15px;">🚀 开始标注视频</button>
+            </div>
+            
+            <!-- 标注进度 -->
+            <div class="label-section label-progress-section" id="labelProgressSection" style="display: none;">
+                <h4>📊 标注进度</h4>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="labelProgressBar" style="width: 0%;"></div>
+                </div>
+                <p class="progress-text" id="labelProgressText">准备中...</p>
+            </div>
+            
+            <!-- 标注结果 -->
+            <div class="label-section label-result-section" id="labelResultSection" style="display: none;">
+                <h4>📹 标注结果</h4>
+                <div class="label-stats" id="labelStats"></div>
+                <div class="download-area">
+                    <a class="download-btn" id="labelDownloadBtn" href="#" download>⬇️ 下载标注视频</a>
+                </div>
+                <p class="processing-time" id="labelProcessingTime"></p>
+            </div>
+        </div>
+        
+        <!-- 实时标注模式 -->
+        <div class="mode-content" id="realtimeMode">
+            <!-- 添加标注人物 -->
+            <div class="realtime-section">
+                <h4>👥 添加标注人物</h4>
+                <div class="add-person-area">
+                    <div class="upload-area" id="realtimePersonUploadArea" style="padding: 15px; display: inline-block; width: auto; min-width: 150px;">
+                        <div class="upload-icon" style="font-size: 24px;">📷</div>
+                        <p class="upload-text" style="font-size: 12px;">点击上传照片</p>
+                    </div>
+                    <input type="file" class="file-input" id="realtimePersonImageInput" accept="image/*">
+                    
+                    <div class="person-input-group">
+                        <img id="realtimePersonPreview" src="" alt="" style="display: none; width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        <input type="text" id="realtimePersonNameInput" placeholder="输入英文名字 (如: Tom)" style="width: 150px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        <button class="add-person-btn" id="addRealtimePersonBtn" disabled>添加</button>
+                    </div>
+                </div>
+                
+                <div class="persons-list-area">
+                    <h5>已添加人物：<span id="realtimePersonCount">0</span> 人</h5>
+                    <div class="persons-list" id="realtimePersonsList">
+                        <p class="no-persons-text">暂未添加人物</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上传视频 -->
+            <div class="realtime-section">
+                <h4>🎬 上传视频</h4>
+                <div class="upload-area" id="realtimeVideoUploadArea">
+                    <div class="upload-icon">🎬</div>
+                    <p class="upload-text">点击或拖拽视频到此处上传</p>
+                    <p class="upload-text" style="font-size: 12px; color: #999;">支持 MP4, WebM, MOV 格式</p>
+                </div>
+                <input type="file" class="file-input" id="realtimeVideoInput" accept="video/*,.mp4,.webm,.mov">
+                
+                <div class="preview-container" id="realtimeVideoPreviewContainer" style="display: none;">
+                    <video class="video-preview" id="realtimeVideoPreview" controls style="max-height: 200px;"></video>
+                    <p class="file-info" id="realtimeVideoInfo"></p>
+                </div>
+            </div>
+            
+            <!-- GCloud 认证配置按钮 -->
+            <div class="realtime-section" style="padding: 15px;">
+                <button class="submit-btn" id="openGcloudConfigBtn" style="background: linear-gradient(135deg, #4285f4 0%, #34a853 100%); margin: 0; width: 100%;">
+                    🔐 GCloud 认证配置
+                </button>
+                <p style="font-size: 11px; color: #888; margin-top: 8px; text-align: center;">启用 Gemini 场景分析前，请先完成认证</p>
+            </div>
+            
+            <!-- 标注设置 -->
+            <div class="realtime-section">
+                <h4>⚙️ 设置</h4>
+                <div class="realtime-settings">
+                    <div class="input-group">
+                        <label for="realtimeThresholdInput">相似度阈值:</label>
+                        <input type="number" id="realtimeThresholdInput" value="70" min="50" max="95" style="width: 80px;">
+                        <span>%</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="realtimeFpsInput">处理帧率:</label>
+                        <input type="number" id="realtimeFpsInput" value="2" min="1" max="10" style="width: 80px;">
+                        <span>fps</span>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="realtimeShowUnknownCheckbox" checked>
+                        <label for="realtimeShowUnknownCheckbox">显示未识别人脸</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="realtimeGeminiCheckbox">
+                        <label for="realtimeGeminiCheckbox">🤖 启用 Gemini 场景分析</label>
+                    </div>
+                </div>
+                
+                <!-- Gemini 提示词输入区域 -->
+                <div id="realtimeGeminiPromptSection" style="display: none; margin-top: 15px; padding: 15px; background: #e8f4fd; border-radius: 10px; border: 1px solid #b3d7f5;">
+                    <!-- 视频处理模式选择 -->
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 14px; font-weight: 600; color: #1565c0; display: block; margin-bottom: 10px;">
+                            ⚙️ 视频处理设置
+                        </label>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label style="display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: white; border-radius: 8px; cursor: pointer; border: 2px solid #e0e0e0;" id="realtimeModeFramesLabel">
+                                <input type="radio" name="realtimeVideoMode" value="frames" id="realtimeModeFrames" checked style="margin-top: 3px;">
+                                <div>
+                                    <span style="font-weight: 500; color: #333;">🖼️ 提取帧模式</span>
+                                    <p style="font-size: 11px; color: #888; margin: 4px 0 0 0;">基于 InsightFace 识别到的人物关键帧进行分析（推荐）</p>
+                                </div>
+                            </label>
+                            <label style="display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: white; border-radius: 8px; cursor: pointer; border: 2px solid #e0e0e0;" id="realtimeModeDirectLabel">
+                                <input type="radio" name="realtimeVideoMode" value="direct" id="realtimeModeDirect" style="margin-top: 3px;">
+                                <div>
+                                    <span style="font-weight: 500; color: #333;">🎬 直接发送视频</span>
+                                    <p style="font-size: 11px; color: #888; margin: 4px 0 0 0;">将完整视频发送给 Gemini 分析（支持时序理解）</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <label for="realtimeGeminiPrompt" style="font-size: 14px; font-weight: 600; color: #1565c0; display: block; margin-bottom: 8px;">
+                        📝 Gemini 分析提示词
+                    </label>
+                    <textarea id="realtimeGeminiPrompt" placeholder="请描述您想让 Gemini 分析的内容..." 
+                        style="width: 100%; min-height: 80px; padding: 12px; border: 2px solid #90caf9; border-radius: 8px; font-size: 14px; resize: vertical; box-sizing: border-box;">请分析每个标注人物在视频中的场景，描述他们的动作、姿态和周围环境。</textarea>
+                    <p style="font-size: 11px; color: #666; margin-top: 8px;" id="realtimeGeminiHint">
+                        💡 提示：会自动结合 InsightFace 识别到的人物信息进行分析
+                    </p>
+                </div>
+                
+                <button class="submit-btn" id="startRealtimeBtn" disabled style="margin-top: 15px;">▶️ 开始实时标注</button>
+                <button class="submit-btn" id="stopRealtimeBtn" style="margin-top: 15px; display: none; background: #dc3545;">⏹️ 停止</button>
+            </div>
+            
+            <!-- GCloud 认证配置弹出框 -->
+            <div id="gcloudConfigModal" class="modal-overlay" style="display: none;">
+                <div class="modal-content" style="max-width: 550px; max-height: 90vh; overflow-y: auto;">
+                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #e0e0e0;">
+                        <h3 style="margin: 0; color: #333;">🔐 GCloud 认证配置</h3>
+                        <button id="closeGcloudConfigBtn" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666; line-height: 1; padding: 0 5px;">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <!-- Project ID 设置 -->
+                        <div style="margin-bottom: 20px;">
+                            <label style="font-size: 14px; font-weight: 600; color: #333; display: block; margin-bottom: 8px;">📁 Project ID</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="gcloudProjectInput" placeholder="输入 Project ID，如: cloud-llm-preview2" 
+                                       style="flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: monospace; font-size: 13px;">
+                                <button class="submit-btn" id="setProjectBtn" style="min-width: 100px; margin: 0;">
+                                    📋 设置
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 操作按钮 -->
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <button class="submit-btn" id="gcloudAuthBtn" style="flex: 1; background: linear-gradient(135deg, #4285f4 0%, #34a853 100%); margin: 0;">
+                                🔑 执行认证
+                            </button>
+                            <button class="submit-btn" id="checkGcloudStatusBtn" style="flex: 1; background: linear-gradient(135deg, #34a853 0%, #4285f4 100%); margin: 0;">
+                                ✅ 检查状态
+                            </button>
+                        </div>
+                        
+                        <!-- 验证码输入区 -->
+                        <div id="authCodeSection" style="display: none; margin-bottom: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; border: 1px solid #ffc107;">
+                            <p style="font-size: 12px; color: #856404; margin: 0 0 10px 0; font-weight: 500;">📋 在浏览器完成登录后，复制验证码粘贴到下方</p>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="gcloudAuthCodeInput" placeholder="粘贴验证码" 
+                                       style="flex: 1; padding: 12px; border: 2px solid #ffc107; border-radius: 8px; font-family: monospace; font-size: 14px;">
+                                <button class="submit-btn" id="submitAuthCodeBtn" style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); color: #333; min-width: 100px; margin: 0;">
+                                    📤 提交
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 状态信息 -->
+                        <div id="gcloudStatusInfo" style="display: none; margin-bottom: 15px; padding: 12px; border-radius: 8px; font-size: 13px;"></div>
+                        
+                        <!-- 执行日志 -->
+                        <div>
+                            <label style="font-size: 14px; font-weight: 600; color: #333; display: block; margin-bottom: 8px;">📜 执行日志</label>
+                            <pre id="gcloudLogOutput" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-size: 12px; max-height: 200px; overflow-y: auto; margin: 0; white-space: pre-wrap; word-wrap: break-word;">等待执行...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 实时预览区域 -->
+            <div class="realtime-section realtime-preview-section" id="realtimePreviewSection" style="display: none;">
+                <h4>🖥️ 实时预览</h4>
+                <div class="realtime-progress">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="realtimeProgressBar" style="width: 0%;"></div>
+                    </div>
+                    <p class="progress-text" id="realtimeProgressText">准备中...</p>
+                </div>
+                <div class="realtime-display">
+                    <img id="realtimeFrameDisplay" src="" alt="实时预览" style="max-width: 100%; border-radius: 10px; display: none;">
+                    <div class="realtime-info" id="realtimeInfo">
+                        <span id="realtimeTimeInfo">时间: 0s</span>
+                        <span id="realtimeFaceInfo">检测到: 0 人</span>
+                    </div>
+                </div>
+                <div class="realtime-faces-list" id="realtimeFacesList"></div>
+                
+                <!-- 实时JSON统计 -->
+                <div class="realtime-json-stats" style="margin-top: 15px;">
+                    <h5>📊 实时统计</h5>
+                    <pre id="realtimeJsonStats" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-size: 12px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                </div>
+            </div>
+            
+            <!-- 完成统计 -->
+            <div class="realtime-section realtime-complete-section" id="realtimeCompleteSection" style="display: none;">
+                <h4>✅ 标注完成</h4>
+                <div class="realtime-stats" id="realtimeStats"></div>
+                
+                <!-- Gemini人物场景分析结果 -->
+                <div id="realtimeGeminiResult" style="display: none; margin-top: 15px;">
+                    <h5>🤖 Gemini 人物场景分析</h5>
+                    
+                    <!-- Token 统计信息 -->
+                    <div id="realtimeTokenStats" style="display: none; margin-bottom: 15px;">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
+                            <div style="flex: 1; min-width: 120px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="font-size: 12px; opacity: 0.9;">Input Tokens</div>
+                                <div style="font-size: 24px; font-weight: bold;" id="realtimeInputTokens">-</div>
+                            </div>
+                            <div style="flex: 1; min-width: 120px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="font-size: 12px; opacity: 0.9;">Output Tokens</div>
+                                <div style="font-size: 24px; font-weight: bold;" id="realtimeOutputTokens">-</div>
+                            </div>
+                            <div style="flex: 1; min-width: 120px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="font-size: 12px; opacity: 0.9;">Total Tokens</div>
+                                <div style="font-size: 24px; font-weight: bold;" id="realtimeTotalTokens">-</div>
+                            </div>
+                        </div>
+                        <div style="background: #f0f4f8; padding: 10px 15px; border-radius: 8px; font-size: 13px; color: #555;">
+                            <span>📊 分析人数: <strong id="realtimePersonsAnalyzed">-</strong> 人</span>
+                            <span style="margin-left: 20px;">🖼️ 分析帧数: <strong id="realtimeFramesAnalyzed">-</strong> 帧</span>
+                        </div>
+                    </div>
+                    
+                    <div id="realtimeGeminiContent" style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4285f4;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 视频Cache模式 -->
+        <div class="mode-content" id="cacheMode">
+            <!-- 添加标注人物 -->
+            <div class="cache-section" style="background: #fff3e0; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #ffb74d;">
+                <h4 style="color: #e65100; margin-bottom: 15px;">👥 添加标注人物 <span style="font-size: 12px; color: #888;">(可选)</span></h4>
+                <div class="add-person-area">
+                    <div class="upload-area" id="cachePersonUploadArea" style="padding: 15px; display: inline-block; width: auto; min-width: 150px;">
+                        <div class="upload-icon" style="font-size: 24px;">📷</div>
+                        <p class="upload-text" style="font-size: 12px;">点击上传人物照片</p>
+                    </div>
+                    <input type="file" class="file-input" id="cachePersonImageInput" accept="image/*">
+                    <input type="text" id="cachePersonNameInput" placeholder="输入人物名称 (英文)" style="padding: 10px; border: 2px solid #ffb74d; border-radius: 8px; margin-left: 10px; width: 150px;">
+                    <button class="submit-btn" id="cacheAddPersonBtn" style="padding: 10px 20px; margin-left: 10px; background: linear-gradient(135deg, #ff9800, #f57c00);">添加</button>
+                </div>
+                <div id="cachePersonList" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px;"></div>
+            </div>
+            
+            <!-- 上传视频并创建 Cache -->
+            <div class="cache-section" style="background: #e3f2fd; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #64b5f6;">
+                <h4 style="color: #1565c0; margin-bottom: 15px;">🎬 上传视频并创建 Cache</h4>
+                <div class="upload-area" id="cacheVideoUploadArea" style="padding: 20px;">
+                    <div class="upload-icon">📹</div>
+                    <p class="upload-text">点击或拖拽视频到此处上传</p>
+                    <p class="upload-text" style="font-size: 12px; color: #999;">支持 MP4, AVI, MOV, WebM 格式</p>
+                </div>
+                <input type="file" class="file-input" id="cacheVideoInput" accept="video/*">
+                
+                <div id="cacheVideoPreview" style="display: none; margin-top: 15px;">
+                    <video id="cacheVideoPlayer" controls style="max-width: 100%; max-height: 300px; border-radius: 10px;"></video>
+                    <p id="cacheVideoInfo" style="margin-top: 8px; font-size: 13px; color: #666;"></p>
+                </div>
+                
+                <!-- 基础分析提示词 -->
+                <div style="margin-top: 15px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #1565c0; display: block; margin-bottom: 8px;">
+                        📝 基础分析提示词 <span style="font-weight: normal; font-size: 11px; color: #888;">(会写入 Cache，影响所有查询)</span>
+                    </label>
+                    <textarea id="cacheBasePrompt" placeholder="例如：请重点关注人物的行为动作、互动关系、情绪变化等..." 
+                        style="width: 100%; min-height: 60px; padding: 12px; border: 2px solid #90caf9; border-radius: 8px; font-size: 14px; resize: vertical; box-sizing: border-box;"></textarea>
+                    <p style="font-size: 11px; color: #666; margin-top: 5px;">
+                        💡 此提示词会与 InsightFace 识别结果一起写入 Cache，后续所有查询都会基于此进行分析
+                    </p>
+                </div>
+                
+                <button class="submit-btn" id="createCacheBtn" disabled style="margin-top: 15px; background: linear-gradient(135deg, #2196f3, #1976d2);">📦 创建 Cache</button>
+                
+                <!-- Cache 状态显示 -->
+                <div id="cacheStatusArea" style="display: none; margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 10px; border: 2px solid #81c784;">
+                    <h5 style="color: #2e7d32; margin-bottom: 10px;">✅ Cache 已创建</h5>
+                    <p style="font-size: 13px; margin: 5px 0;"><strong>Cache ID:</strong> <span id="cacheIdDisplay">-</span></p>
+                    <p style="font-size: 13px; margin: 5px 0;"><strong>创建时间:</strong> <span id="cacheCreatedAt">-</span></p>
+                    <p style="font-size: 13px; margin: 5px 0;"><strong>过期时间:</strong> <span id="cacheExpiresAt">-</span></p>
+                    <p style="font-size: 13px; margin: 5px 0;"><strong>缓存 Token:</strong> <span id="cacheTotalTokens">-</span></p>
+                    <button class="submit-btn" id="deleteCacheBtn" style="margin-top: 10px; padding: 8px 15px; background: #ef5350; font-size: 13px;">🗑️ 删除 Cache</button>
+                </div>
+            </div>
+            
+            <!-- 查询分析 -->
+            <div class="cache-section" style="background: #f3e5f5; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #ba68c8;">
+                <h4 style="color: #7b1fa2; margin-bottom: 15px;">💬 查询分析 <span style="font-size: 12px; color: #888;">(可多次查询，复用 Cache)</span></h4>
+                
+                <textarea id="cacheQueryInput" placeholder="请输入您的分析问题，例如：请分析视频中人物的行为轨迹..." 
+                    style="width: 100%; min-height: 80px; padding: 12px; border: 2px solid #ce93d8; border-radius: 8px; font-size: 14px; resize: vertical; box-sizing: border-box;"></textarea>
+                
+                <button class="submit-btn" id="sendCacheQueryBtn" disabled style="margin-top: 10px; background: linear-gradient(135deg, #9c27b0, #7b1fa2);">🔍 发送查询</button>
+                
+                <!-- Token 统计 -->
+                <div id="cacheTokenStats" style="display: none; margin-top: 15px; padding: 12px; background: #e8f5e9; border-radius: 8px; border: 1px solid #81c784;">
+                    <h5 style="color: #2e7d32; margin-bottom: 10px;">📊 Token 统计 & 费用节省</h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+                        <div style="background: #c8e6c9; padding: 8px; border-radius: 6px;">
+                            <div style="color: #1b5e20; font-weight: 600;">📦 视频缓存 (低费率)</div>
+                            <div><strong id="statCachedTokens">-</strong> Token</div>
+                        </div>
+                        <div style="background: #fff3e0; padding: 8px; border-radius: 6px;">
+                            <div style="color: #e65100; font-weight: 600;">📝 本次问题 (正常费率)</div>
+                            <div><strong id="statNewInputTokens">-</strong> Token</div>
+                        </div>
+                        <div style="background: #e3f2fd; padding: 8px; border-radius: 6px;">
+                            <div style="color: #1565c0; font-weight: 600;">📤 输出</div>
+                            <div><strong id="statOutputTokens">-</strong> Token</div>
+                        </div>
+                        <div style="background: #f3e5f5; padding: 8px; border-radius: 6px;">
+                            <div style="color: #7b1fa2; font-weight: 600;">💰 本次节省</div>
+                            <div><strong id="statSavedTokens">-</strong> Token <span style="color: #4caf50;">✓</span></div>
+                        </div>
+                    </div>
+                    <p style="font-size: 11px; color: #666; margin-top: 10px; margin-bottom: 0;">
+                        💡 传统方式每次查询都要计算视频 Token (<span id="statCachedTokensRef">-</span>)，使用 Cache 后只计算问题 Token (<span id="statNewInputTokensRef">-</span>)
+                    </p>
+                </div>
+                
+                <!-- 分析结果 -->
+                <div id="cacheResultArea" style="display: none; margin-top: 20px;">
+                    <h5 style="color: #7b1fa2; margin-bottom: 10px;">📝 分析结果</h5>
+                    <div id="cacheResultContent" style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #9c27b0; white-space: pre-wrap; line-height: 1.6;"></div>
+                </div>
+                
+                <!-- 查询历史 -->
+                <div id="cacheQueryHistory" style="margin-top: 20px;">
+                    <h5 style="color: #666; margin-bottom: 10px;">📜 查询历史</h5>
+                    <div id="cacheHistoryList" style="max-height: 200px; overflow-y: auto;"></div>
+                </div>
+            </div>
+            
+            <!-- 使用说明 -->
+            <div style="background: #fffde7; border-radius: 10px; padding: 15px; border: 1px solid #fff59d;">
+                <h5 style="color: #f57f17; margin-bottom: 10px;">💡 使用说明</h5>
+                <ul style="font-size: 13px; color: #666; margin: 0; padding-left: 20px; line-height: 1.8;">
+                    <li><strong>费用节省</strong>：视频内容创建 Cache 后，后续查询只计算问题 Token，不重复计算视频 Token</li>
+                    <li><strong>适用场景</strong>：需要对同一视频进行多次不同角度分析时</li>
+                    <li><strong>有效期</strong>：Cache 默认 1 小时有效，过期后需重新创建</li>
+                    <li><strong>Owner 标注</strong>：添加人物照片可帮助 Gemini 识别特定人物</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 陌生人检测模式 -->
+        <div class="mode-content" id="strangerMode">
+            <!-- 添加户主照片 -->
+            <div class="stranger-section" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #ff9800;">
+                <h4 style="color: #e65100; margin-bottom: 15px;">👥 添加户主照片</h4>
+                <div class="add-person-area">
+                    <div class="upload-area" id="strangerPersonUploadArea" style="padding: 15px; display: inline-block; width: auto; min-width: 150px;">
+                        <div class="upload-icon" style="font-size: 24px;">📷</div>
+                        <p class="upload-text" style="font-size: 12px;">点击上传照片</p>
+                    </div>
+                    <input type="file" class="file-input" id="strangerPersonImageInput" accept="image/*">
+                    
+                    <div class="person-input-group">
+                        <img id="strangerPersonPreview" src="" alt="" style="display: none; width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        <input type="text" id="strangerPersonNameInput" placeholder="输入户主名称" style="width: 150px; padding: 10px; border: 2px solid #ff9800; border-radius: 8px;">
+                        <button class="add-person-btn" id="addStrangerPersonBtn" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);">添加</button>
+                    </div>
+                </div>
+                
+                <div class="persons-list-area" style="margin-top: 15px;">
+                    <h5>已添加户主：<span id="strangerPersonCount">0</span> 人</h5>
+                    <div class="persons-list" id="strangerPersonsList">
+                        <p class="no-persons-text">暂未添加户主照片</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上传视频 -->
+            <div class="stranger-section" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #2196f3;">
+                <h4 style="color: #1565c0; margin-bottom: 15px;">📹 上传视频</h4>
+                <div class="upload-area" id="strangerVideoUploadArea">
+                    <div class="upload-icon">🎬</div>
+                    <p class="upload-text">点击或拖拽视频到此处上传</p>
+                    <p class="upload-text" style="font-size: 12px; color: #999;">支持 MP4, WebM, MOV 格式</p>
+                </div>
+                <input type="file" class="file-input" id="strangerVideoInput" accept="video/*,.mp4,.webm,.mov">
+                
+                <div class="preview-container" id="strangerVideoPreviewContainer" style="display: none;">
+                    <video class="video-preview" id="strangerVideoPreview" controls style="max-height: 250px;"></video>
+                    <p class="file-info" id="strangerVideoInfo"></p>
+                </div>
+            </div>
+            
+            <!-- 分析模式选择 -->
+            <div class="stranger-section" style="background: #f5f5f5; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #9e9e9e;">
+                <h4 style="color: #424242; margin-bottom: 15px;">⚙️ 分析设置</h4>
+                
+                <div class="radio-group" style="margin-bottom: 20px;">
+                    <label class="radio-label" style="border-color: #2196f3; background: #e3f2fd;">
+                        <input type="radio" name="strangerAnalyzeMode" value="direct" id="strangerModeDirectRadio" checked>
+                        <span class="radio-text">🎬 直接分析</span>
+                        <span class="radio-desc">将视频和户主照片一起发送给 Gemini 分析</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="strangerAnalyzeMode" value="cache" id="strangerModeCacheRadio">
+                        <span class="radio-text">📦 Cache 模式</span>
+                        <span class="radio-desc">将户主信息写入 Cache，可多次分析不同视频</span>
+                    </label>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #333; display: block; margin-bottom: 8px;">
+                        📝 分析提示词 <span style="font-weight: normal; color: #888;">(可自定义)</span>
+                    </label>
+                    <textarea id="strangerPromptInput" placeholder="请分析视频中是否有陌生人出现，并描述场景..." 
+                        style="width: 100%; min-height: 80px; padding: 12px; border: 2px solid #9e9e9e; border-radius: 8px; font-size: 14px; resize: vertical; box-sizing: border-box;">请判断视频中是否有陌生人（未在户主照片中出现的人），详细描述每个人的行为和场景。</textarea>
+                </div>
+                
+                <button class="submit-btn" id="startStrangerAnalyzeBtn" disabled style="background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);">🔍 开始陌生人检测</button>
+            </div>
+            
+            <!-- Cache 状态（仅 Cache 模式显示）-->
+            <div class="stranger-section" id="strangerCacheStatusSection" style="display: none; background: #e8f5e9; border-radius: 15px; padding: 20px; margin-bottom: 20px; border: 2px solid #4caf50;">
+                <h5 style="color: #2e7d32; margin-bottom: 10px;">✅ Cache 已创建</h5>
+                <p style="font-size: 13px; margin: 5px 0;"><strong>Cache ID:</strong> <span id="strangerCacheId">-</span></p>
+                <p style="font-size: 13px; margin: 5px 0;"><strong>户主数量:</strong> <span id="strangerCacheOwnerCount">-</span></p>
+                <p style="font-size: 13px; margin: 5px 0;"><strong>过期时间:</strong> <span id="strangerCacheExpires">-</span></p>
+                <button class="submit-btn" id="deleteStrangerCacheBtn" style="margin-top: 10px; padding: 8px 15px; background: #ef5350; font-size: 13px;">🗑️ 删除 Cache</button>
+            </div>
+            
+            <!-- 分析进度 -->
+            <div class="stranger-section" id="strangerProgressSection" style="display: none; background: #fff; border-radius: 15px; padding: 20px; margin-bottom: 20px; border: 2px solid #2196f3;">
+                <h4 style="color: #1565c0; margin-bottom: 15px;">📊 分析进度</h4>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="strangerProgressBar" style="width: 0%;"></div>
+                </div>
+                <p class="progress-text" id="strangerProgressText">准备中...</p>
+            </div>
+            
+            <!-- 检测结果 -->
+            <div class="stranger-section" id="strangerResultSection" style="display: none; background: #fff; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #4caf50;">
+                <h4 style="color: #2e7d32; margin-bottom: 20px;">📊 检测结果</h4>
+                
+                <!-- 警告/安全提示 -->
+                <div id="strangerAlertBox" style="padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                    <p id="strangerAlertText" style="font-size: 18px; font-weight: bold; margin: 0;"></p>
+                </div>
+                
+                <!-- Token 统计 -->
+                <div class="token-info" style="margin-bottom: 20px;">
+                    <div class="token-box">
+                        <div class="token-label">Input Tokens</div>
+                        <div class="token-value" id="strangerInputTokens">-</div>
+                    </div>
+                    <div class="token-box">
+                        <div class="token-label">Output Tokens</div>
+                        <div class="token-value" id="strangerOutputTokens">-</div>
+                    </div>
+                    <div class="token-box">
+                        <div class="token-label">处理耗时</div>
+                        <div class="token-value" id="strangerProcessingTime">-</div>
+                    </div>
+                </div>
+                
+                <!-- 详细 Token 信息 -->
+                <div class="token-details-section" id="strangerTokenDetailsSection" style="display: none; margin-bottom: 20px;">
+                    <h5>📊 Token 详细信息</h5>
+                    <div class="token-details-grid">
+                        <!-- Input Token 详情 -->
+                        <div class="token-detail-card">
+                            <h6>📥 Input Tokens 详情</h6>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">📝 Text</span>
+                                <span class="token-detail-value" id="strangerInputTextTokens">0</span>
+                            </div>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">🖼️ Image</span>
+                                <span class="token-detail-value highlight" id="strangerInputImageTokens">0</span>
+                            </div>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">🎬 Video</span>
+                                <span class="token-detail-value highlight" id="strangerInputVideoTokens">0</span>
+                            </div>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">🔊 Audio</span>
+                                <span class="token-detail-value" id="strangerInputAudioTokens">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Output Token 详情 -->
+                        <div class="token-detail-card">
+                            <h6>📤 Output Tokens 详情</h6>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">📝 Text</span>
+                                <span class="token-detail-value" id="strangerOutputTextTokens">0</span>
+                            </div>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">🧠 Thinking</span>
+                                <span class="token-detail-value thinking" id="strangerThinkingTokens">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 缓存 Token 详情 -->
+                        <div class="token-detail-card">
+                            <h6>💾 缓存 Tokens</h6>
+                            <div class="token-detail-item">
+                                <span class="token-detail-label">Cached Content</span>
+                                <span class="token-detail-value" id="strangerCachedTokens">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 详细分析 -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <h5 style="margin-bottom: 10px; color: #333;">🤖 Gemini 分析结果</h5>
+                    <div id="strangerAnalysisContent" style="white-space: pre-wrap; line-height: 1.8; color: #555;"></div>
+                </div>
+            </div>
+            
+            <!-- 使用说明 -->
+            <div style="background: #fffde7; border-radius: 10px; padding: 15px; border: 1px solid #fff59d;">
+                <h5 style="color: #f57f17; margin-bottom: 10px;">💡 使用说明</h5>
+                <ul style="font-size: 13px; color: #666; margin: 0; padding-left: 20px; line-height: 1.8;">
+                    <li><strong>纯 Gemini 识别</strong>：将户主照片和视频一起发送给 Gemini，由 AI 判断是否有陌生人</li>
+                    <li><strong>直接分析模式</strong>：适合单次分析，每次都发送完整数据</li>
+                    <li><strong>Cache 模式</strong>：适合用同一批户主照片分析多个视频，节省重复传输</li>
+                    <li><strong>识别精度</strong>：依赖 Gemini 的视觉理解能力，适合对人脸有一定差异的场景</li>
+                </ul>
             </div>
         </div>
         
@@ -1014,6 +2511,15 @@
         </div>
     </div>
     
+    <!-- 图片放大模态框 -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <span class="image-modal-close" id="imageModalClose">&times;</span>
+            <img class="image-modal-img" id="imageModalImg" src="" alt="放大图片">
+            <div class="image-modal-info" id="imageModalInfo"></div>
+        </div>
+    </div>
+    
     <script>
         // 模式切换
         const modeTabs = document.querySelectorAll('.mode-tab');
@@ -1035,11 +2541,52 @@
                     }
                 });
                 
-                // 更新提示词
+                // 更新提示词和按钮显示
+                const promptSection = document.querySelector('.prompt-section');
+                const submitBtnEl = document.getElementById('submitBtn');
+                const submitLangchainBtnEl = document.getElementById('submitLangchainBtn');
+                const resultSectionEl = document.getElementById('resultSection');
+                
                 if (mode === 'image') {
                     document.getElementById('promptInput').placeholder = '请描述您想让 AI 分析的内容，例如：请描述这张图片的内容';
-                } else {
+                    promptSection.style.display = 'block';
+                    submitBtnEl.style.display = 'block';
+                    submitLangchainBtnEl.style.display = 'block';
+                    resultSectionEl.style.display = '';
+                } else if (mode === 'video') {
                     document.getElementById('promptInput').placeholder = '请描述您想让 AI 分析的内容，例如：请描述这个视频的内容';
+                    promptSection.style.display = 'block';
+                    submitBtnEl.style.display = 'block';
+                    submitLangchainBtnEl.style.display = 'none';
+                    resultSectionEl.style.display = '';
+                } else if (mode === 'face') {
+                    // 人脸识别模式：隐藏原有的提示词和提交按钮
+                    promptSection.style.display = 'none';
+                    submitBtnEl.style.display = 'none';
+                    submitLangchainBtnEl.style.display = 'none';
+                    resultSectionEl.style.display = 'none';
+                    // 加载户主列表
+                    if (typeof loadFacesList === 'function') {
+                        loadFacesList();
+                    }
+                } else if (mode === 'label') {
+                    // 视频标注模式：隐藏原有的提示词和提交按钮
+                    promptSection.style.display = 'none';
+                    submitBtnEl.style.display = 'none';
+                    submitLangchainBtnEl.style.display = 'none';
+                    resultSectionEl.style.display = 'none';
+                } else if (mode === 'realtime') {
+                    // 实时标注模式：隐藏原有的提示词和提交按钮
+                    promptSection.style.display = 'none';
+                    submitBtnEl.style.display = 'none';
+                    submitLangchainBtnEl.style.display = 'none';
+                    resultSectionEl.style.display = 'none';
+                } else if (mode === 'cache') {
+                    // 视频Cache模式：隐藏原有的提示词和提交按钮
+                    promptSection.style.display = 'none';
+                    submitBtnEl.style.display = 'none';
+                    submitLangchainBtnEl.style.display = 'none';
+                    resultSectionEl.style.display = 'none';
                 }
                 
                 // 重置提交按钮状态
@@ -1729,6 +3276,2267 @@
         
         // 初始化 LangChain 按钮状态
         updateSubmitButton();
+        
+        // ==================== 人脸识别功能 ====================
+        
+        // 人脸识别相关变量
+        const faceUploadArea = document.getElementById('faceUploadArea');
+        const faceImageInput = document.getElementById('faceImageInput');
+        const facePreviewContainer = document.getElementById('facePreviewContainer');
+        const facePreview = document.getElementById('facePreview');
+        const faceNameInput = document.getElementById('faceNameInput');
+        const registerFaceBtn = document.getElementById('registerFaceBtn');
+        const refreshFacesBtn = document.getElementById('refreshFacesBtn');
+        const facesList = document.getElementById('facesList');
+        
+        const faceVideoUploadArea = document.getElementById('faceVideoUploadArea');
+        const faceVideoInput = document.getElementById('faceVideoInput');
+        const faceVideoPreviewContainer = document.getElementById('faceVideoPreviewContainer');
+        const faceVideoPreview = document.getElementById('faceVideoPreview');
+        const faceVideoInfo = document.getElementById('faceVideoInfo');
+        const faceRecFpsInput = document.getElementById('faceRecFpsInput');
+        const faceRecMaxFramesInput = document.getElementById('faceRecMaxFramesInput');
+        const useGeminiCheckbox = document.getElementById('useGeminiCheckbox');
+        const startFaceRecBtn = document.getElementById('startFaceRecBtn');
+        
+        let selectedFaceImage = null;
+        let selectedFaceVideo = null;
+        
+        // 户主照片上传
+        faceUploadArea.addEventListener('click', () => faceImageInput.click());
+        
+        faceUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            faceUploadArea.classList.add('dragover');
+        });
+        
+        faceUploadArea.addEventListener('dragleave', () => {
+            faceUploadArea.classList.remove('dragover');
+        });
+        
+        faceUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            faceUploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleFaceImage(e.dataTransfer.files[0]);
+            }
+        });
+        
+        faceImageInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFaceImage(e.target.files[0]);
+            }
+        });
+        
+        function handleFaceImage(file) {
+            if (!file.type.startsWith('image/')) {
+                showError('请选择图片文件');
+                return;
+            }
+            
+            selectedFaceImage = file;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                facePreview.src = e.target.result;
+                facePreviewContainer.style.display = 'block';
+                updateRegisterButton();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // 户主姓名输入
+        faceNameInput.addEventListener('input', updateRegisterButton);
+        
+        function updateRegisterButton() {
+            registerFaceBtn.disabled = !selectedFaceImage || !faceNameInput.value.trim();
+        }
+        
+        // 注册户主
+        registerFaceBtn.addEventListener('click', async () => {
+            const name = faceNameInput.value.trim();
+            if (!selectedFaceImage || !name) {
+                showError('请上传照片并输入姓名');
+                return;
+            }
+            
+            registerFaceBtn.disabled = true;
+            registerFaceBtn.textContent = '注册中...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('image', selectedFaceImage);
+                formData.append('name', name);
+                
+                const response = await fetch('/api/face/register', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(data.message);
+                    // 重置表单
+                    selectedFaceImage = null;
+                    faceImageInput.value = '';
+                    facePreviewContainer.style.display = 'none';
+                    faceNameInput.value = '';
+                    // 刷新列表
+                    loadFacesList();
+                } else {
+                    showError(data.message || data.error);
+                }
+            } catch (error) {
+                showError('注册失败: ' + error.message);
+            } finally {
+                registerFaceBtn.disabled = false;
+                registerFaceBtn.textContent = '注册户主';
+                updateRegisterButton();
+            }
+        });
+        
+        // 刷新户主列表
+        refreshFacesBtn.addEventListener('click', loadFacesList);
+        
+        async function loadFacesList() {
+            try {
+                const response = await fetch('/api/face/list');
+                const data = await response.json();
+                
+                if (data.success) {
+                    if (data.faces.length === 0) {
+                        facesList.innerHTML = '<p class="no-faces-text">暂无已注册户主</p>';
+                    } else {
+                        facesList.innerHTML = data.faces.map(face => `
+                            <div class="face-item">
+                                <span class="face-name">👤 ${face.name}</span>
+                                <span class="face-count">(${face.photo_count}张照片)</span>
+                                <button class="delete-face-btn" onclick="deleteFace('${face.name}')">删除</button>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (error) {
+                console.error('加载户主列表失败:', error);
+            }
+        }
+        
+        // 删除户主
+        async function deleteFace(name) {
+            if (!confirm(`确定要删除户主 "${name}" 吗？`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/face/delete/${encodeURIComponent(name)}`, {
+                    method: 'DELETE'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(data.message);
+                    loadFacesList();
+                } else {
+                    showError(data.message || data.error);
+                }
+            } catch (error) {
+                showError('删除失败: ' + error.message);
+            }
+        }
+        
+        // 视频上传（人脸识别）
+        faceVideoUploadArea.addEventListener('click', () => faceVideoInput.click());
+        
+        faceVideoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            faceVideoUploadArea.classList.add('dragover');
+        });
+        
+        faceVideoUploadArea.addEventListener('dragleave', () => {
+            faceVideoUploadArea.classList.remove('dragover');
+        });
+        
+        faceVideoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            faceVideoUploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleFaceVideo(e.dataTransfer.files[0]);
+            }
+        });
+        
+        faceVideoInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFaceVideo(e.target.files[0]);
+            }
+        });
+        
+        function handleFaceVideo(file) {
+            const fileName = file.name.toLowerCase();
+            const isVideo = file.type.startsWith('video/') || 
+                           fileName.endsWith('.mp4') || fileName.endsWith('.webm') || 
+                           fileName.endsWith('.mov') || fileName.endsWith('.ts');
+            
+            if (!isVideo) {
+                showError('请选择视频文件');
+                return;
+            }
+            
+            selectedFaceVideo = file;
+            
+            const url = URL.createObjectURL(file);
+            faceVideoPreview.src = url;
+            faceVideoPreviewContainer.style.display = 'block';
+            
+            faceVideoPreview.onloadedmetadata = () => {
+                faceVideoInfo.textContent = `${file.name} | ${(file.size / 1024 / 1024).toFixed(2)} MB | ${faceVideoPreview.duration.toFixed(1)}秒`;
+            };
+            
+            startFaceRecBtn.disabled = false;
+        }
+        
+        // 开始人脸识别
+        startFaceRecBtn.addEventListener('click', async () => {
+            if (!selectedFaceVideo) {
+                showError('请先选择视频');
+                return;
+            }
+            
+            startFaceRecBtn.disabled = true;
+            startFaceRecBtn.textContent = '识别中...';
+            loading.classList.add('show');
+            loadingText.textContent = '正在进行人脸识别，请稍候...';
+            document.getElementById('faceResultSection').style.display = 'none';
+            hideError();
+            
+            try {
+                const formData = new FormData();
+                formData.append('video', selectedFaceVideo);
+                formData.append('fps', faceRecFpsInput.value || '1');
+                formData.append('max_frames', faceRecMaxFramesInput.value || '30');
+                formData.append('use_gemini', useGeminiCheckbox.checked ? 'true' : 'false');
+                formData.append('prompt', '请描述视频中人物的行为和场景');
+                formData.append('model_id', modelSelect.value);
+                
+                const response = await fetch('/api/face/recognize_video', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayFaceRecognitionResult(data);
+                } else {
+                    showError(data.error || '识别失败');
+                }
+            } catch (error) {
+                showError('请求失败: ' + error.message);
+            } finally {
+                startFaceRecBtn.disabled = false;
+                startFaceRecBtn.textContent = '🔍 开始人脸识别';
+                loading.classList.remove('show');
+            }
+        });
+        
+        function displayFaceRecognitionResult(data) {
+            // 显示结果区域
+            document.getElementById('faceResultSection').style.display = 'block';
+            
+            // 显示摘要
+            document.getElementById('faceSummaryText').textContent = data.summary?.summary || '无识别结果';
+            
+            // 显示相似度统计
+            const statsBox = document.getElementById('similarityStatsBox');
+            const statsGrid = document.getElementById('similarityStatsGrid');
+            const similarityStats = data.summary?.similarity_stats;
+            
+            if (similarityStats && Object.keys(similarityStats).length > 0) {
+                let statsHtml = '';
+                for (const [name, stats] of Object.entries(similarityStats)) {
+                    const maxPercent = (stats.max * 100).toFixed(1);
+                    const avgPercent = (stats.avg * 100).toFixed(1);
+                    const minPercent = (stats.min * 100).toFixed(1);
+                    
+                    // 根据最高相似度决定颜色
+                    let colorClass = 'low';
+                    let barColor = '#dc3545';
+                    if (stats.max >= 0.7) {
+                        colorClass = 'high';
+                        barColor = '#28a745';
+                    } else if (stats.max >= 0.5) {
+                        colorClass = 'medium';
+                        barColor = '#ffc107';
+                    }
+                    
+                    statsHtml += `
+                        <div class="similarity-stat-card">
+                            <div class="person-name">👤 ${name}</div>
+                            <div class="stat-row">
+                                <span class="stat-label">出现次数</span>
+                                <span class="stat-value">${stats.count} 次</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">最高相似度</span>
+                                <span class="stat-value ${colorClass}">${maxPercent}%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">平均相似度</span>
+                                <span class="stat-value">${avgPercent}%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">最低相似度</span>
+                                <span class="stat-value">${minPercent}%</span>
+                            </div>
+                            <div class="similarity-bar">
+                                <div class="similarity-bar-fill" style="width: ${maxPercent}%; background: ${barColor};"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                statsGrid.innerHTML = statsHtml;
+                statsBox.style.display = 'block';
+            } else {
+                statsBox.style.display = 'none';
+            }
+            
+            // 显示标注帧图片
+            const framesBox = document.getElementById('annotatedFramesBox');
+            const framesGrid = document.getElementById('annotatedFramesGrid');
+            const annotatedFrames = data.annotated_frames;
+            
+            if (annotatedFrames && annotatedFrames.length > 0) {
+                let framesHtml = '';
+                annotatedFrames.forEach((frame, index) => {
+                    framesHtml += `
+                        <div class="annotated-frame-item" onclick="showImageModal(${index})">
+                            <img src="data:image/jpeg;base64,${frame.image_base64}" alt="帧${frame.frame}">
+                            <div class="annotated-frame-info">
+                                <div class="frame-time">帧${frame.frame} - ${frame.time}秒</div>
+                                <div class="frame-stats">
+                                    ${frame.recognized_count > 0 ? `<span class="stat-recognized">✓ 户主${frame.recognized_count}</span>` : ''}
+                                    ${frame.stranger_count > 0 ? `<span class="stat-stranger">⚠ 陌生人${frame.stranger_count}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                framesGrid.innerHTML = framesHtml;
+                framesBox.style.display = 'block';
+                
+                // 保存标注帧数据供模态框使用
+                window.annotatedFramesData = annotatedFrames;
+            } else {
+                framesBox.style.display = 'none';
+            }
+            
+            // 显示详细记录
+            const detailsList = document.getElementById('faceDetailsList');
+            if (data.face_results && data.face_results.length > 0) {
+                let detailsHtml = '';
+                data.face_results.forEach(frame => {
+                    if (frame.faces && frame.faces.length > 0) {
+                        frame.faces.forEach(face => {
+                            const isRecognized = face.name !== '未知' && face.similarity >= 0.7;
+                            detailsHtml += `
+                                <div class="face-detail-item">
+                                    <span class="time">帧${frame.frame} (${frame.time}s)</span>
+                                    <span class="name ${isRecognized ? 'recognized' : 'unknown'}">${isRecognized ? face.name : '陌生人'}</span>
+                                    <span class="similarity">相似度: ${(face.similarity * 100).toFixed(1)}%</span>
+                                </div>
+                            `;
+                        });
+                    }
+                });
+                detailsList.innerHTML = detailsHtml || '<p>未检测到人脸</p>';
+            } else {
+                detailsList.innerHTML = '<p>未检测到人脸</p>';
+            }
+            
+            // 显示 Gemini 分析（如果有）
+            const geminiBox = document.getElementById('geminiAnalysisBox');
+            if (data.gemini_analysis) {
+                document.getElementById('geminiAnalysisContent').textContent = data.gemini_analysis;
+                geminiBox.style.display = 'block';
+            } else {
+                geminiBox.style.display = 'none';
+            }
+            
+            // 显示处理时间
+            if (data.processing_time) {
+                document.getElementById('faceProcessingTimeText').textContent = 
+                    `处理时间: 人脸识别 ${data.processing_time.face_recognition}秒` +
+                    (data.processing_time.gemini_analysis > 0 ? ` | Gemini分析 ${data.processing_time.gemini_analysis}秒` : '') +
+                    ` | 总计 ${data.processing_time.total}秒`;
+            }
+        }
+        
+        // 图片放大模态框功能
+        function showImageModal(index) {
+            const frame = window.annotatedFramesData[index];
+            if (!frame) return;
+            
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('imageModalImg');
+            const modalInfo = document.getElementById('imageModalInfo');
+            
+            modalImg.src = 'data:image/jpeg;base64,' + frame.image_base64;
+            
+            let infoHtml = `帧${frame.frame} - 时间: ${frame.time}秒 | `;
+            if (frame.recognized_count > 0) {
+                infoHtml += `<span class="info-recognized">识别到户主: ${frame.recognized_count}人</span> `;
+            }
+            if (frame.stranger_count > 0) {
+                infoHtml += `<span class="info-stranger">⚠ 发现陌生人: ${frame.stranger_count}人</span>`;
+            }
+            modalInfo.innerHTML = infoHtml;
+            
+            modal.classList.add('show');
+        }
+        
+        // 关闭模态框
+        document.getElementById('imageModalClose').addEventListener('click', () => {
+            document.getElementById('imageModal').classList.remove('show');
+        });
+        
+        // 点击模态框背景关闭
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('imageModal')) {
+                document.getElementById('imageModal').classList.remove('show');
+            }
+        });
+        
+        // ESC 键关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('imageModal').classList.remove('show');
+            }
+        });
+        
+        // ==================== 视频标注模式 ====================
+        
+        const labelMode = document.getElementById('labelMode');
+        const labelPersonImageInput = document.getElementById('labelPersonImageInput');
+        const labelPersonUploadArea = document.getElementById('labelPersonUploadArea');
+        const labelPersonPreview = document.getElementById('labelPersonPreview');
+        const labelPersonNameInput = document.getElementById('labelPersonNameInput');
+        const addLabelPersonBtn = document.getElementById('addLabelPersonBtn');
+        const labelPersonsList = document.getElementById('labelPersonsList');
+        const labelPersonCount = document.getElementById('labelPersonCount');
+        const labelVideoInput = document.getElementById('labelVideoInput');
+        const labelVideoUploadArea = document.getElementById('labelVideoUploadArea');
+        const labelVideoPreviewContainer = document.getElementById('labelVideoPreviewContainer');
+        const labelVideoPreview = document.getElementById('labelVideoPreview');
+        const labelVideoInfo = document.getElementById('labelVideoInfo');
+        const startLabelBtn = document.getElementById('startLabelBtn');
+        const labelProgressSection = document.getElementById('labelProgressSection');
+        const labelProgressBar = document.getElementById('labelProgressBar');
+        const labelProgressText = document.getElementById('labelProgressText');
+        const labelResultSection = document.getElementById('labelResultSection');
+        const labelStats = document.getElementById('labelStats');
+        const labelDownloadBtn = document.getElementById('labelDownloadBtn');
+        const labelProcessingTime = document.getElementById('labelProcessingTime');
+        
+        let labelSessionId = null;
+        let labelPersons = []; // 存储 {name, imageData} 对象
+        let labelSelectedImageData = null;
+        let labelSelectedVideo = null;
+        
+        // 创建标注会话
+        async function createLabelSession() {
+            try {
+                const response = await fetch('/api/label/create_session', { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    labelSessionId = data.session_id;
+                    console.log('标注会话已创建:', labelSessionId);
+                }
+            } catch (error) {
+                console.error('创建会话失败:', error);
+            }
+        }
+        
+        // 监听模式切换，当切换到视频标注模式时初始化会话
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const mode = this.dataset.mode;
+                if (mode === 'label' && !labelSessionId) {
+                    createLabelSession();
+                    labelPersons = [];
+                    updateLabelPersonsList();
+                }
+            });
+        });
+        
+        // 点击上传区域
+        labelPersonUploadArea.addEventListener('click', () => labelPersonImageInput.click());
+        
+        // 选择照片
+        labelPersonImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    labelSelectedImageData = e.target.result;
+                    labelPersonPreview.src = labelSelectedImageData;
+                    labelPersonPreview.style.display = 'block';
+                    updateAddPersonBtnState();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 名字输入
+        labelPersonNameInput.addEventListener('input', updateAddPersonBtnState);
+        
+        function updateAddPersonBtnState() {
+            const hasImage = labelSelectedImageData !== null;
+            const hasName = labelPersonNameInput.value.trim().length > 0;
+            addLabelPersonBtn.disabled = !(hasImage && hasName);
+        }
+        
+        // 添加人物
+        addLabelPersonBtn.addEventListener('click', async function() {
+            if (!labelSessionId) {
+                await createLabelSession();
+            }
+            
+            const name = labelPersonNameInput.value.trim();
+            if (!name || !labelSelectedImageData) return;
+            
+            // 检查名字格式
+            if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+                alert('名字只能包含英文字母、数字和下划线');
+                return;
+            }
+            
+            // 检查重名
+            if (labelPersons.some(p => p.name === name)) {
+                alert('该名字已存在');
+                return;
+            }
+            
+            addLabelPersonBtn.disabled = true;
+            addLabelPersonBtn.textContent = '添加中...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('session_id', labelSessionId);
+                formData.append('name', name);
+                
+                // 将 base64 转换为 Blob
+                const base64Data = labelSelectedImageData.split(',')[1];
+                const byteCharacters = atob(base64Data);
+                const byteArray = new Uint8Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteArray[i] = byteCharacters.charCodeAt(i);
+                }
+                const blob = new Blob([byteArray], { type: 'image/jpeg' });
+                formData.append('image', blob, 'photo.jpg');
+                
+                const response = await fetch('/api/label/add_person', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    labelPersons.push({name: name, imageData: labelSelectedImageData});
+                    updateLabelPersonsList();
+                    
+                    // 重置输入
+                    labelPersonNameInput.value = '';
+                    labelSelectedImageData = null;
+                    labelPersonPreview.style.display = 'none';
+                    labelPersonImageInput.value = '';
+                } else {
+                    alert(data.error || '添加失败');
+                }
+            } catch (error) {
+                alert('添加失败: ' + error.message);
+            } finally {
+                addLabelPersonBtn.disabled = false;
+                addLabelPersonBtn.textContent = '添加';
+                updateAddPersonBtnState();
+                updateStartLabelBtnState();
+            }
+        });
+        
+        // 更新人物列表显示
+        function updateLabelPersonsList() {
+            labelPersonCount.textContent = labelPersons.length;
+            
+            if (labelPersons.length === 0) {
+                labelPersonsList.innerHTML = '<p class="no-persons-text">暂未添加人物</p>';
+            } else {
+                labelPersonsList.innerHTML = labelPersons.map(person => `
+                    <div class="person-item" style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #f8f9fa; border-radius: 8px; margin-bottom: 6px;">
+                        <img src="${person.imageData}" alt="${person.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid #4CAF50;">
+                        <span class="person-name" style="flex: 1; font-weight: 500;">${person.name}</span>
+                        <button class="remove-person-btn" data-name="${person.name}" style="background: #ff5252; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px; line-height: 1;">×</button>
+                    </div>
+                `).join('');
+                
+                // 绑定删除按钮事件
+                labelPersonsList.querySelectorAll('.remove-person-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        removeLabelPerson(this.dataset.name);
+                    });
+                });
+            }
+        }
+        
+        // 移除人物
+        async function removeLabelPerson(name) {
+            try {
+                const formData = new FormData();
+                formData.append('session_id', labelSessionId);
+                formData.append('name', name);
+                
+                await fetch('/api/label/remove_person', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                labelPersons = labelPersons.filter(p => p.name !== name);
+                updateLabelPersonsList();
+                updateStartLabelBtnState();
+            } catch (error) {
+                console.error('移除失败:', error);
+            }
+        }
+        
+        // 视频上传区域
+        labelVideoUploadArea.addEventListener('click', () => labelVideoInput.click());
+        
+        labelVideoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            labelVideoUploadArea.classList.add('drag-over');
+        });
+        
+        labelVideoUploadArea.addEventListener('dragleave', () => {
+            labelVideoUploadArea.classList.remove('drag-over');
+        });
+        
+        labelVideoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            labelVideoUploadArea.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('video/')) {
+                handleLabelVideoSelect(file);
+            }
+        });
+        
+        labelVideoInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                handleLabelVideoSelect(this.files[0]);
+            }
+        });
+        
+        function handleLabelVideoSelect(file) {
+            labelSelectedVideo = file;
+            labelVideoPreview.src = URL.createObjectURL(file);
+            labelVideoPreviewContainer.style.display = 'block';
+            labelVideoInfo.textContent = `文件: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            labelVideoUploadArea.style.display = 'none';
+            updateStartLabelBtnState();
+        }
+        
+        // 更新开始按钮状态
+        function updateStartLabelBtnState() {
+            startLabelBtn.disabled = !(labelPersons.length > 0 && labelSelectedVideo);
+        }
+        
+        // 开始标注
+        startLabelBtn.addEventListener('click', async function() {
+            if (!labelSessionId || labelPersons.length === 0 || !labelSelectedVideo) {
+                return;
+            }
+            
+            startLabelBtn.disabled = true;
+            startLabelBtn.textContent = '处理中...';
+            labelProgressSection.style.display = 'block';
+            labelResultSection.style.display = 'none';
+            labelProgressBar.style.width = '0%';
+            labelProgressText.textContent = '正在上传视频...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('session_id', labelSessionId);
+                formData.append('video', labelSelectedVideo);
+                formData.append('threshold', document.getElementById('labelThresholdInput').value / 100);
+                formData.append('show_unknown', document.getElementById('labelShowUnknownCheckbox').checked);
+                
+                labelProgressBar.style.width = '20%';
+                labelProgressText.textContent = '视频已上传，正在分析人脸...';
+                
+                const response = await fetch('/api/label/process_video', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                labelProgressBar.style.width = '80%';
+                labelProgressText.textContent = '正在生成标注视频...';
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    labelProgressBar.style.width = '100%';
+                    labelProgressText.textContent = '标注完成!';
+                    
+                    // 显示结果
+                    displayLabelResult(data);
+                } else {
+                    labelProgressText.textContent = '处理失败: ' + (data.error || '未知错误');
+                }
+                
+            } catch (error) {
+                labelProgressText.textContent = '处理失败: ' + error.message;
+            } finally {
+                startLabelBtn.disabled = false;
+                startLabelBtn.textContent = '🚀 开始标注视频';
+            }
+        });
+        
+        // 显示标注结果
+        function displayLabelResult(data) {
+            labelResultSection.style.display = 'block';
+            
+            const stats = data.stats;
+            let statsHtml = `
+                <p>📊 <strong>处理帧数:</strong> ${stats.processed_frames} / ${stats.total_frames}</p>
+                <p>👤 <strong>检测人脸数:</strong> ${stats.faces_detected}</p>
+                <p>✅ <strong>识别成功数:</strong> ${stats.faces_recognized}</p>
+            `;
+            
+            if (Object.keys(stats.person_counts).length > 0) {
+                statsHtml += '<p>📝 <strong>人物出现次数:</strong></p><ul>';
+                for (const [name, count] of Object.entries(stats.person_counts)) {
+                    statsHtml += `<li>${name}: ${count} 次</li>`;
+                }
+                statsHtml += '</ul>';
+            }
+            
+            labelStats.innerHTML = statsHtml;
+            
+            // 设置下载链接
+            labelDownloadBtn.href = data.download_url;
+            labelDownloadBtn.download = data.filename;
+            
+            labelProcessingTime.textContent = `处理耗时: ${data.processing_time} 秒`;
+        }
+        
+        // ==================== 实时标注模式 ====================
+        
+        const realtimeMode = document.getElementById('realtimeMode');
+        const realtimePersonImageInput = document.getElementById('realtimePersonImageInput');
+        const realtimePersonUploadArea = document.getElementById('realtimePersonUploadArea');
+        const realtimePersonPreview = document.getElementById('realtimePersonPreview');
+        const realtimePersonNameInput = document.getElementById('realtimePersonNameInput');
+        const addRealtimePersonBtn = document.getElementById('addRealtimePersonBtn');
+        const realtimePersonsList = document.getElementById('realtimePersonsList');
+        const realtimePersonCount = document.getElementById('realtimePersonCount');
+        const realtimeVideoInput = document.getElementById('realtimeVideoInput');
+        const realtimeVideoUploadArea = document.getElementById('realtimeVideoUploadArea');
+        const realtimeVideoPreviewContainer = document.getElementById('realtimeVideoPreviewContainer');
+        const realtimeVideoPreview = document.getElementById('realtimeVideoPreview');
+        const realtimeVideoInfo = document.getElementById('realtimeVideoInfo');
+        const startRealtimeBtn = document.getElementById('startRealtimeBtn');
+        const stopRealtimeBtn = document.getElementById('stopRealtimeBtn');
+        const realtimePreviewSection = document.getElementById('realtimePreviewSection');
+        const realtimeProgressBar = document.getElementById('realtimeProgressBar');
+        const realtimeProgressText = document.getElementById('realtimeProgressText');
+        const realtimeFrameDisplay = document.getElementById('realtimeFrameDisplay');
+        const realtimeTimeInfo = document.getElementById('realtimeTimeInfo');
+        const realtimeFaceInfo = document.getElementById('realtimeFaceInfo');
+        const realtimeFacesList = document.getElementById('realtimeFacesList');
+        const realtimeCompleteSection = document.getElementById('realtimeCompleteSection');
+        const realtimeStats = document.getElementById('realtimeStats');
+        const gcloudLogOutput = document.getElementById('gcloudLogOutput');
+        const gcloudStatusInfo = document.getElementById('gcloudStatusInfo');
+        const gcloudConfigModal = document.getElementById('gcloudConfigModal');
+        
+        // Gemini 复选框控制提示词显示
+        const realtimeGeminiCheckbox = document.getElementById('realtimeGeminiCheckbox');
+        const realtimeGeminiPromptSection = document.getElementById('realtimeGeminiPromptSection');
+        
+        realtimeGeminiCheckbox.addEventListener('change', function() {
+            realtimeGeminiPromptSection.style.display = this.checked ? 'block' : 'none';
+        });
+        
+        // 视频处理模式切换
+        const realtimeModeFrames = document.getElementById('realtimeModeFrames');
+        const realtimeModeDirect = document.getElementById('realtimeModeDirect');
+        const realtimeGeminiHint = document.getElementById('realtimeGeminiHint');
+        const realtimeModeFramesLabel = document.getElementById('realtimeModeFramesLabel');
+        const realtimeModeDirectLabel = document.getElementById('realtimeModeDirectLabel');
+        
+        function updateRealtimeModeUI() {
+            if (realtimeModeFrames.checked) {
+                realtimeModeFramesLabel.style.borderColor = '#4285f4';
+                realtimeModeFramesLabel.style.background = '#e8f4fd';
+                realtimeModeDirectLabel.style.borderColor = '#e0e0e0';
+                realtimeModeDirectLabel.style.background = 'white';
+                realtimeGeminiHint.textContent = '💡 提示：会自动结合 InsightFace 识别到的人物信息进行分析';
+            } else {
+                realtimeModeDirectLabel.style.borderColor = '#4285f4';
+                realtimeModeDirectLabel.style.background = '#e8f4fd';
+                realtimeModeFramesLabel.style.borderColor = '#e0e0e0';
+                realtimeModeFramesLabel.style.background = 'white';
+                realtimeGeminiHint.textContent = '💡 提示：将完整视频发送给 Gemini，支持更好的时序理解';
+            }
+        }
+        
+        realtimeModeFrames.addEventListener('change', updateRealtimeModeUI);
+        realtimeModeDirect.addEventListener('change', updateRealtimeModeUI);
+        
+        // GCloud 配置弹出框控制
+        document.getElementById('openGcloudConfigBtn').addEventListener('click', function() {
+            gcloudConfigModal.style.display = 'flex';
+        });
+        
+        document.getElementById('closeGcloudConfigBtn').addEventListener('click', function() {
+            gcloudConfigModal.style.display = 'none';
+        });
+        
+        // 点击遮罩层关闭弹出框
+        gcloudConfigModal.addEventListener('click', function(e) {
+            if (e.target === gcloudConfigModal) {
+                gcloudConfigModal.style.display = 'none';
+            }
+        });
+        
+        // GCloud 认证相关功能
+        document.getElementById('setProjectBtn').addEventListener('click', async function() {
+            const projectId = document.getElementById('gcloudProjectInput').value.trim();
+            if (!projectId) {
+                alert('请输入 Project ID');
+                return;
+            }
+            
+            this.disabled = true;
+            gcloudLogOutput.textContent = '';
+            
+            const formData = new FormData();
+            formData.append('project_id', projectId);
+            
+            try {
+                const response = await fetch('/api/gcloud/set_project', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            if (data.type === 'start') {
+                                gcloudLogOutput.textContent += `$ ${data.command}\n`;
+                            } else if (data.type === 'output') {
+                                gcloudLogOutput.textContent += data.line + '\n';
+                            } else if (data.type === 'complete') {
+                                gcloudLogOutput.textContent += `\n${data.success ? '✅' : '❌'} ${data.message}\n`;
+                            } else if (data.type === 'error') {
+                                gcloudLogOutput.textContent += `\n❌ 错误: ${data.message}\n`;
+                            }
+                            gcloudLogOutput.scrollTop = gcloudLogOutput.scrollHeight;
+                        }
+                    }
+                }
+            } catch (error) {
+                gcloudLogOutput.textContent += `\n❌ 请求失败: ${error.message}\n`;
+            } finally {
+                this.disabled = false;
+            }
+        });
+        
+        document.getElementById('gcloudAuthBtn').addEventListener('click', async function() {
+            this.disabled = true;
+            gcloudLogOutput.textContent = '';
+            document.getElementById('authCodeSection').style.display = 'none';
+            document.getElementById('gcloudAuthCodeInput').value = '';
+            
+            try {
+                const response = await fetch('/api/gcloud/auth', { method: 'POST' });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            if (data.type === 'start') {
+                                gcloudLogOutput.textContent += `$ ${data.command}\n`;
+                                gcloudLogOutput.textContent += '请复制下方 URL 到浏览器打开，完成 Google 登录后获取验证码...\n\n';
+                            } else if (data.type === 'output') {
+                                // 检测是否是 URL 行
+                                if (data.line.startsWith('http')) {
+                                    gcloudLogOutput.textContent += '🔗 认证链接 (请复制到浏览器打开):\n' + data.line + '\n\n';
+                                } else {
+                                    gcloudLogOutput.textContent += data.line + '\n';
+                                }
+                            } else if (data.type === 'waiting_code') {
+                                gcloudLogOutput.textContent += '\n⏳ 等待输入验证码...\n';
+                                document.getElementById('authCodeSection').style.display = 'block';
+                            } else if (data.type === 'complete') {
+                                gcloudLogOutput.textContent += `\n${data.success ? '✅' : '❌'} ${data.message}\n`;
+                                document.getElementById('authCodeSection').style.display = 'none';
+                            } else if (data.type === 'error') {
+                                gcloudLogOutput.textContent += `\n❌ 错误: ${data.message}\n`;
+                            }
+                            gcloudLogOutput.scrollTop = gcloudLogOutput.scrollHeight;
+                        }
+                    }
+                }
+            } catch (error) {
+                gcloudLogOutput.textContent += `\n❌ 请求失败: ${error.message}\n`;
+            } finally {
+                this.disabled = false;
+            }
+        });
+        
+        // 提交验证码
+        document.getElementById('submitAuthCodeBtn').addEventListener('click', async function() {
+            const authCode = document.getElementById('gcloudAuthCodeInput').value.trim();
+            if (!authCode) {
+                alert('请输入验证码');
+                return;
+            }
+            
+            this.disabled = true;
+            
+            const formData = new FormData();
+            formData.append('auth_code', authCode);
+            
+            try {
+                const response = await fetch('/api/gcloud/auth_code', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            if (data.type === 'output') {
+                                gcloudLogOutput.textContent += data.line + '\n';
+                            } else if (data.type === 'complete') {
+                                gcloudLogOutput.textContent += `\n${data.success ? '✅' : '❌'} ${data.message}\n`;
+                                document.getElementById('authCodeSection').style.display = 'none';
+                            } else if (data.type === 'error') {
+                                gcloudLogOutput.textContent += `\n❌ 错误: ${data.message}\n`;
+                            }
+                            gcloudLogOutput.scrollTop = gcloudLogOutput.scrollHeight;
+                        }
+                    }
+                }
+            } catch (error) {
+                gcloudLogOutput.textContent += `\n❌ 请求失败: ${error.message}\n`;
+            } finally {
+                this.disabled = false;
+            }
+        });
+        
+        document.getElementById('checkGcloudStatusBtn').addEventListener('click', async function() {
+            this.disabled = true;
+            
+            try {
+                const response = await fetch('/api/gcloud/status');
+                const data = await response.json();
+                
+                if (data.success) {
+                    gcloudStatusInfo.style.display = 'block';
+                    gcloudStatusInfo.style.background = data.authenticated ? '#d4edda' : '#fff3cd';
+                    gcloudStatusInfo.style.color = data.authenticated ? '#155724' : '#856404';
+                    gcloudStatusInfo.innerHTML = `
+                        <strong>📊 当前状态:</strong><br>
+                        • 项目: ${data.project || '未设置'}<br>
+                        • 账号: ${data.account || '未设置'}<br>
+                        • 认证: ${data.authenticated ? '✅ 已认证' : '❌ 未认证'}
+                    `;
+                } else {
+                    gcloudStatusInfo.style.display = 'block';
+                    gcloudStatusInfo.style.background = '#f8d7da';
+                    gcloudStatusInfo.style.color = '#721c24';
+                    gcloudStatusInfo.textContent = `❌ 检查失败: ${data.error}`;
+                }
+            } catch (error) {
+                gcloudStatusInfo.style.display = 'block';
+                gcloudStatusInfo.style.background = '#f8d7da';
+                gcloudStatusInfo.style.color = '#721c24';
+                gcloudStatusInfo.textContent = `❌ 请求失败: ${error.message}`;
+            } finally {
+                this.disabled = false;
+            }
+        });
+        
+        let realtimeSessionId = null;
+        let realtimePersons = []; // 存储 {name, imageData} 对象
+        let realtimeSelectedImageData = null;
+        let realtimeSelectedVideo = null;
+        let realtimeEventSource = null;
+        let realtimePersonCounts = {};
+        let realtimeUnknownCount = 0;
+        let realtimeFrameDetails = [];
+        let realtimeTotalFrames = 0;
+        let realtimeProcessedFrames = 0;
+        
+        // 创建实时标注会话
+        async function createRealtimeSession() {
+            try {
+                const response = await fetch('/api/realtime/create_session', { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    realtimeSessionId = data.session_id;
+                    console.log('实时标注会话已创建:', realtimeSessionId);
+                }
+            } catch (error) {
+                console.error('创建会话失败:', error);
+            }
+        }
+        
+        // 监听模式切换
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const mode = this.dataset.mode;
+                if (mode === 'realtime' && !realtimeSessionId) {
+                    createRealtimeSession();
+                    realtimePersons = [];
+                    updateRealtimePersonsList();
+                }
+            });
+        });
+        
+        // 点击上传区域
+        realtimePersonUploadArea.addEventListener('click', () => realtimePersonImageInput.click());
+        
+        // 选择照片
+        realtimePersonImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    realtimeSelectedImageData = e.target.result;
+                    realtimePersonPreview.src = realtimeSelectedImageData;
+                    realtimePersonPreview.style.display = 'block';
+                    updateAddRealtimePersonBtnState();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 名字输入
+        realtimePersonNameInput.addEventListener('input', updateAddRealtimePersonBtnState);
+        
+        function updateAddRealtimePersonBtnState() {
+            const hasImage = realtimeSelectedImageData !== null;
+            const hasName = realtimePersonNameInput.value.trim().length > 0;
+            addRealtimePersonBtn.disabled = !(hasImage && hasName);
+        }
+        
+        // 添加人物
+        addRealtimePersonBtn.addEventListener('click', async function() {
+            if (!realtimeSessionId) {
+                await createRealtimeSession();
+            }
+            
+            const name = realtimePersonNameInput.value.trim();
+            if (!name || !realtimeSelectedImageData) return;
+            
+            if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+                alert('名字只能包含英文字母、数字和下划线');
+                return;
+            }
+            
+            if (realtimePersons.some(p => p.name === name)) {
+                alert('该名字已存在');
+                return;
+            }
+            
+            addRealtimePersonBtn.disabled = true;
+            addRealtimePersonBtn.textContent = '添加中...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('session_id', realtimeSessionId);
+                formData.append('name', name);
+                
+                const base64Data = realtimeSelectedImageData.split(',')[1];
+                const byteCharacters = atob(base64Data);
+                const byteArray = new Uint8Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteArray[i] = byteCharacters.charCodeAt(i);
+                }
+                const blob = new Blob([byteArray], { type: 'image/jpeg' });
+                formData.append('image', blob, 'photo.jpg');
+                
+                const response = await fetch('/api/realtime/add_person', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    realtimePersons.push({name: name, imageData: realtimeSelectedImageData});
+                    updateRealtimePersonsList();
+                    
+                    realtimePersonNameInput.value = '';
+                    realtimeSelectedImageData = null;
+                    realtimePersonPreview.style.display = 'none';
+                    realtimePersonImageInput.value = '';
+                } else {
+                    alert(data.error || '添加失败');
+                }
+            } catch (error) {
+                alert('添加失败: ' + error.message);
+            } finally {
+                addRealtimePersonBtn.disabled = false;
+                addRealtimePersonBtn.textContent = '添加';
+                updateAddRealtimePersonBtnState();
+                updateStartRealtimeBtnState();
+            }
+        });
+        
+        // 更新人物列表显示
+        function updateRealtimePersonsList() {
+            realtimePersonCount.textContent = realtimePersons.length;
+            
+            if (realtimePersons.length === 0) {
+                realtimePersonsList.innerHTML = '<p class="no-persons-text">暂未添加人物</p>';
+            } else {
+                realtimePersonsList.innerHTML = realtimePersons.map(person => `
+                    <div class="person-item" style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #f8f9fa; border-radius: 8px; margin-bottom: 6px;">
+                        <img src="${person.imageData}" alt="${person.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid #4CAF50;">
+                        <span class="person-name" style="flex: 1; font-weight: 500;">${person.name}</span>
+                        <button class="remove-person-btn" data-name="${person.name}" style="background: #ff5252; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px; line-height: 1;">×</button>
+                    </div>
+                `).join('');
+                
+                realtimePersonsList.querySelectorAll('.remove-person-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        removeRealtimePerson(this.dataset.name);
+                    });
+                });
+            }
+        }
+        
+        // 移除人物
+        async function removeRealtimePerson(name) {
+            try {
+                const formData = new FormData();
+                formData.append('session_id', realtimeSessionId);
+                formData.append('name', name);
+                
+                await fetch('/api/realtime/remove_person', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                realtimePersons = realtimePersons.filter(p => p.name !== name);
+                updateRealtimePersonsList();
+                updateStartRealtimeBtnState();
+            } catch (error) {
+                console.error('移除失败:', error);
+            }
+        }
+        
+        // 视频上传
+        realtimeVideoUploadArea.addEventListener('click', () => realtimeVideoInput.click());
+        
+        realtimeVideoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            realtimeVideoUploadArea.classList.add('drag-over');
+        });
+        
+        realtimeVideoUploadArea.addEventListener('dragleave', () => {
+            realtimeVideoUploadArea.classList.remove('drag-over');
+        });
+        
+        realtimeVideoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            realtimeVideoUploadArea.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('video/')) {
+                handleRealtimeVideoSelect(file);
+            }
+        });
+        
+        realtimeVideoInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                handleRealtimeVideoSelect(this.files[0]);
+            }
+        });
+        
+        function handleRealtimeVideoSelect(file) {
+            realtimeSelectedVideo = file;
+            realtimeVideoPreview.src = URL.createObjectURL(file);
+            realtimeVideoPreviewContainer.style.display = 'block';
+            realtimeVideoInfo.textContent = `文件: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            realtimeVideoUploadArea.style.display = 'none';
+            updateStartRealtimeBtnState();
+        }
+        
+        // 更新开始按钮状态
+        function updateStartRealtimeBtnState() {
+            startRealtimeBtn.disabled = !(realtimePersons.length > 0 && realtimeSelectedVideo);
+        }
+        
+        // 开始实时标注
+        startRealtimeBtn.addEventListener('click', async function() {
+            if (!realtimeSessionId || realtimePersons.length === 0 || !realtimeSelectedVideo) {
+                return;
+            }
+            
+            startRealtimeBtn.style.display = 'none';
+            stopRealtimeBtn.style.display = 'inline-block';
+            realtimePreviewSection.style.display = 'block';
+            realtimeCompleteSection.style.display = 'none';
+            realtimeProgressBar.style.width = '0%';
+            realtimeProgressText.textContent = '正在上传视频...';
+            realtimeFrameDisplay.style.display = 'none';
+            
+            // 初始化统计变量
+            realtimePersonCounts = {};
+            realtimeUnknownCount = 0;
+            realtimeFrameDetails = [];
+            realtimeTotalFrames = 0;
+            realtimeProcessedFrames = 0;
+            document.getElementById('realtimeJsonStats').textContent = '等待数据...';
+            document.getElementById('realtimeGeminiResult').style.display = 'none';
+            document.getElementById('realtimeTokenStats').style.display = 'none';
+            
+            const formData = new FormData();
+            formData.append('session_id', realtimeSessionId);
+            formData.append('video', realtimeSelectedVideo);
+            formData.append('threshold', document.getElementById('realtimeThresholdInput').value / 100);
+            formData.append('show_unknown', document.getElementById('realtimeShowUnknownCheckbox').checked);
+            formData.append('target_fps', document.getElementById('realtimeFpsInput').value);
+            formData.append('enable_gemini', document.getElementById('realtimeGeminiCheckbox').checked);
+            formData.append('gemini_prompt', document.getElementById('realtimeGeminiPrompt').value.trim());
+            formData.append('gemini_mode', document.querySelector('input[name="realtimeVideoMode"]:checked').value);
+            
+            try {
+                const response = await fetch('/api/realtime/stream', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '请求失败');
+                }
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    
+                    const lines = buffer.split('\n\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.substring(6));
+                                handleRealtimeData(data);
+                            } catch (e) {
+                                console.error('解析数据失败:', e);
+                            }
+                        }
+                    }
+                }
+                
+            } catch (error) {
+                realtimeProgressText.textContent = '处理失败: ' + error.message;
+            } finally {
+                startRealtimeBtn.style.display = 'inline-block';
+                stopRealtimeBtn.style.display = 'none';
+            }
+        });
+        
+        // 处理实时数据
+        // 更新实时JSON统计显示
+        function updateRealtimeJsonStats() {
+            const ownerList = Object.keys(realtimePersonCounts);
+            const ownerTotalCount = Object.values(realtimePersonCounts).reduce((a, b) => a + b, 0);
+            
+            const stats = {
+                "视频统计": {
+                    "处理帧数": realtimeProcessedFrames,
+                    "总帧数": realtimeTotalFrames
+                },
+                "Owner统计": {
+                    "Owner总出现次数": ownerTotalCount,
+                    "Owner人数": ownerList.length,
+                    "Owner列表": ownerList,
+                    "各Owner出现次数": realtimePersonCounts
+                },
+                "陌生人统计": {
+                    "陌生人出现次数": realtimeUnknownCount,
+                    "陌生人类型数": realtimeUnknownCount > 0 ? 1 : 0
+                },
+                "总结": {
+                    "识别到的人脸总次数": ownerTotalCount + realtimeUnknownCount,
+                    "其中Owner": ownerTotalCount,
+                    "其中陌生人": realtimeUnknownCount
+                }
+            };
+            
+            // 只保留最近10个帧详情（防止数据过大）
+            if (realtimeFrameDetails.length > 0) {
+                stats["最近帧详情"] = realtimeFrameDetails.slice(-10);
+            }
+            
+            document.getElementById('realtimeJsonStats').textContent = JSON.stringify(stats, null, 2);
+        }
+        
+        // 格式化人物场景分析结果
+        function formatPersonSceneAnalysis(analysis) {
+            if (!analysis) return '';
+            
+            // 解析分析结果，按人物分组显示
+            const lines = analysis.split('\n');
+            let html = '';
+            let currentPerson = '';
+            let currentContent = [];
+            
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+                
+                // 检测人物标题行 (━━━ 人名 ━━━)
+                const personMatch = trimmedLine.match(/^━+\s*(.+?)\s*━+$/);
+                if (personMatch) {
+                    // 输出上一个人物的内容
+                    if (currentPerson && currentContent.length > 0) {
+                        html += renderPersonCard(currentPerson, currentContent);
+                    }
+                    currentPerson = personMatch[1];
+                    currentContent = [];
+                    continue;
+                }
+                
+                // 检测标题行
+                if (trimmedLine.startsWith('【') && trimmedLine.endsWith('】')) {
+                    continue; // 跳过总标题
+                }
+                
+                // 收集内容行
+                if (trimmedLine && currentPerson) {
+                    currentContent.push(trimmedLine);
+                }
+            }
+            
+            // 输出最后一个人物的内容
+            if (currentPerson && currentContent.length > 0) {
+                html += renderPersonCard(currentPerson, currentContent);
+            }
+            
+            // 如果没有解析到结构化内容，直接显示原文
+            if (!html) {
+                html = `<pre style="white-space: pre-wrap; margin: 0; font-family: inherit;">${analysis}</pre>`;
+            }
+            
+            return html;
+        }
+        
+        // 渲染单个人物的场景卡片
+        function renderPersonCard(personName, contentLines) {
+            let timePoints = '';
+            let sceneAnalysis = [];
+            
+            for (const line of contentLines) {
+                // 检测时间点行
+                if (line.startsWith('出现时间点:') || line.startsWith('出现时间点：')) {
+                    timePoints = line.replace(/^出现时间点[:：]\s*/, '');
+                } else if (line) {
+                    // 场景描述行
+                    sceneAnalysis.push(line);
+                }
+            }
+            
+            // 格式化场景描述
+            let sceneHtml = '';
+            for (const scene of sceneAnalysis) {
+                // 尝试解析 [时间] - [描述] 格式
+                const timeMatch = scene.match(/^\[?(\d{2}:\d{2})\]?\s*[-–—]\s*(.+)$/);
+                if (timeMatch) {
+                    sceneHtml += `
+                        <div style="display: flex; margin: 8px 0; align-items: flex-start;">
+                            <span style="background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; min-width: 50px; text-align: center;">${timeMatch[1]}</span>
+                            <span style="margin-left: 10px; color: #333;">${timeMatch[2]}</span>
+                        </div>`;
+                } else if (scene.trim()) {
+                    sceneHtml += `<div style="margin: 6px 0; color: #555;">${scene}</div>`;
+                }
+            }
+            
+            return `
+                <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <span style="font-size: 20px; margin-right: 8px;">👤</span>
+                        <span style="font-size: 16px; font-weight: bold; color: #1a73e8;">${personName}</span>
+                    </div>
+                    ${timePoints ? `<div style="font-size: 12px; color: #888; margin-bottom: 10px;">⏱️ 出现时间: ${timePoints}</div>` : ''}
+                    <div style="border-top: 1px solid #eee; padding-top: 10px;">
+                        ${sceneHtml || '<div style="color: #888;">暂无场景描述</div>'}
+                    </div>
+                </div>`;
+        }
+        
+        function handleRealtimeData(data) {
+            if (data.error) {
+                realtimeProgressText.textContent = '错误: ' + data.error;
+                return;
+            }
+            
+            if (data.type === 'info') {
+                realtimeTotalFrames = data.total_frames;
+                realtimeProgressText.textContent = `视频信息: ${data.total_frames} 帧, ${data.video_fps.toFixed(1)} fps`;
+                updateRealtimeJsonStats();
+            } else if (data.type === 'frame') {
+                // 显示帧
+                realtimeFrameDisplay.src = 'data:image/jpeg;base64,' + data.image_base64;
+                realtimeFrameDisplay.style.display = 'block';
+                
+                // 更新进度
+                realtimeProgressBar.style.width = data.progress + '%';
+                realtimeProgressText.textContent = `进度: ${data.progress}% (${data.frame_index}/${data.total_frames})`;
+                realtimeTimeInfo.textContent = `时间: ${data.current_time}s`;
+                realtimeFaceInfo.textContent = `检测到: ${data.faces.length} 人`;
+                
+                realtimeProcessedFrames++;
+                
+                // 记录帧详情
+                const frameInfo = {
+                    "帧": data.frame_index,
+                    "时间": data.current_time + "s",
+                    "人脸": []
+                };
+                
+                // 更新人脸标签
+                let facesHtml = '';
+                data.faces.forEach(face => {
+                    const isRecognized = face.name !== 'Unknown';
+                    const className = isRecognized ? 'recognized' : 'unknown';
+                    const label = isRecognized ? `${face.name} ${(face.similarity * 100).toFixed(0)}%` : 'Unknown';
+                    facesHtml += `<span class="realtime-face-tag ${className}">${label}</span>`;
+                    
+                    // 统计
+                    if (isRecognized) {
+                        realtimePersonCounts[face.name] = (realtimePersonCounts[face.name] || 0) + 1;
+                        frameInfo["人脸"].push(face.name);
+                    } else {
+                        realtimeUnknownCount++;
+                        frameInfo["人脸"].push("Unknown");
+                    }
+                });
+                realtimeFacesList.innerHTML = facesHtml;
+                
+                // 只记录有人脸的帧
+                if (frameInfo["人脸"].length > 0) {
+                    realtimeFrameDetails.push(frameInfo);
+                }
+                
+                // 实时更新JSON统计
+                updateRealtimeJsonStats();
+                
+            } else if (data.type === 'complete') {
+                realtimeProgressBar.style.width = '100%';
+                realtimeProgressText.textContent = '标注完成!';
+                
+                // 显示统计
+                realtimeCompleteSection.style.display = 'block';
+                
+                const ownerList = Object.keys(realtimePersonCounts);
+                const ownerTotalCount = Object.values(realtimePersonCounts).reduce((a, b) => a + b, 0);
+                
+                let statsHtml = `
+                    <p>📊 <strong>处理帧数:</strong> ${data.processed_count} / ${data.total_frames}</p>
+                    <p>👥 <strong>Owner人数:</strong> ${ownerList.length} 人</p>
+                    <p>📝 <strong>Owner总出现:</strong> ${ownerTotalCount} 次</p>
+                `;
+                
+                statsHtml += `<p>👤 <strong>陌生人人数:</strong> ${realtimeUnknownCount > 0 ? 1 : 0} 人</p>`;
+                statsHtml += `<p>⚠️ <strong>陌生人出现:</strong> ${realtimeUnknownCount} 次</p>`;
+                
+                realtimeStats.innerHTML = statsHtml;
+                
+                // 显示Gemini分析结果
+                if (data.gemini_analysis) {
+                    document.getElementById('realtimeGeminiResult').style.display = 'block';
+                    document.getElementById('realtimeGeminiContent').innerHTML = 
+                        '<pre style="white-space: pre-wrap; margin: 0;">' + data.gemini_analysis + '</pre>';
+                }
+            } else if (data.type === 'gemini_analyzing') {
+                // Gemini正在分析中
+                realtimeProgressText.textContent = '🤖 Gemini 人物场景分析中，请稍候...';
+                document.getElementById('realtimeGeminiResult').style.display = 'block';
+                document.getElementById('realtimeGeminiContent').innerHTML = 
+                    '<div style="text-align: center; padding: 20px;"><span style="font-size: 24px;">⏳</span><br>正在分析标注人物的出场场景...</div>';
+            } else if (data.type === 'gemini_complete') {
+                // Gemini分析完成
+                realtimeProgressText.textContent = '✅ 全部完成!';
+                if (data.gemini_analysis) {
+                    // 格式化人物场景分析结果
+                    const analysisHtml = formatPersonSceneAnalysis(data.gemini_analysis);
+                    document.getElementById('realtimeGeminiContent').innerHTML = analysisHtml;
+                }
+                
+                // 显示 Token 统计信息
+                if (data.token_stats && Object.keys(data.token_stats).length > 0) {
+                    const stats = data.token_stats;
+                    document.getElementById('realtimeTokenStats').style.display = 'block';
+                    document.getElementById('realtimeInputTokens').textContent = stats.input_tokens || 0;
+                    document.getElementById('realtimeOutputTokens').textContent = stats.output_tokens || 0;
+                    document.getElementById('realtimeTotalTokens').textContent = stats.total_tokens || 0;
+                    document.getElementById('realtimePersonsAnalyzed').textContent = stats.persons_analyzed || 0;
+                    
+                    // 根据模式显示不同信息
+                    const framesInfo = document.getElementById('realtimeFramesAnalyzed');
+                    if (stats.mode === 'direct') {
+                        framesInfo.textContent = '完整视频';
+                        framesInfo.parentElement.innerHTML = '🎬 处理模式: <strong>直接发送视频</strong>';
+                    } else {
+                        framesInfo.textContent = stats.frames_analyzed || 0;
+                    }
+                }
+            }
+        }
+        
+        // 停止实时标注
+        stopRealtimeBtn.addEventListener('click', function() {
+            // 目前 SSE 不支持中途取消，只能刷新页面
+            if (confirm('确定要停止吗？')) {
+                location.reload();
+            }
+        });
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 检查 InsightFace 状态
+            fetch('/api/face/status')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.insightface_available) {
+                        console.warn('InsightFace 模块未安装');
+                    }
+                })
+                .catch(err => console.error('检查 InsightFace 状态失败:', err));
+        });
+        
+        // ==================== 视频Cache模式 ====================
+        
+        const cacheMode = document.getElementById('cacheMode');
+        const cachePersonUploadArea = document.getElementById('cachePersonUploadArea');
+        const cachePersonImageInput = document.getElementById('cachePersonImageInput');
+        const cachePersonNameInput = document.getElementById('cachePersonNameInput');
+        const cacheAddPersonBtn = document.getElementById('cacheAddPersonBtn');
+        const cachePersonList = document.getElementById('cachePersonList');
+        const cacheVideoUploadArea = document.getElementById('cacheVideoUploadArea');
+        const cacheVideoInput = document.getElementById('cacheVideoInput');
+        const cacheVideoPreview = document.getElementById('cacheVideoPreview');
+        const cacheVideoPlayer = document.getElementById('cacheVideoPlayer');
+        const cacheVideoInfo = document.getElementById('cacheVideoInfo');
+        const createCacheBtn = document.getElementById('createCacheBtn');
+        const cacheStatusArea = document.getElementById('cacheStatusArea');
+        const cacheIdDisplay = document.getElementById('cacheIdDisplay');
+        const cacheCreatedAt = document.getElementById('cacheCreatedAt');
+        const cacheExpiresAt = document.getElementById('cacheExpiresAt');
+        const cacheTotalTokens = document.getElementById('cacheTotalTokens');
+        const deleteCacheBtn = document.getElementById('deleteCacheBtn');
+        const cacheQueryInput = document.getElementById('cacheQueryInput');
+        const sendCacheQueryBtn = document.getElementById('sendCacheQueryBtn');
+        const cacheTokenStats = document.getElementById('cacheTokenStats');
+        const cacheResultArea = document.getElementById('cacheResultArea');
+        const cacheResultContent = document.getElementById('cacheResultContent');
+        const cacheHistoryList = document.getElementById('cacheHistoryList');
+        
+        // 状态变量
+        let cachePersons = [];
+        let cacheSelectedVideo = null;
+        let currentCacheId = null;
+        let cacheQueryHistory = [];
+        
+        // 人物照片上传
+        cachePersonUploadArea.addEventListener('click', () => cachePersonImageInput.click());
+        
+        cachePersonImageInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    cachePersonUploadArea.querySelector('.upload-icon').textContent = '✅';
+                    cachePersonUploadArea.querySelector('.upload-text').textContent = file.name.substring(0, 15) + '...';
+                    cachePersonUploadArea.dataset.imageData = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 添加人物
+        cacheAddPersonBtn.addEventListener('click', function() {
+            const name = cachePersonNameInput.value.trim();
+            const imageData = cachePersonUploadArea.dataset.imageData;
+            
+            if (!name) {
+                alert('请输入人物名称');
+                return;
+            }
+            
+            if (!imageData) {
+                alert('请上传人物照片！视频Cache模块需要照片才能进行人脸匹配。');
+                return;
+            }
+            
+            console.log('添加人物:', name, 'imageData长度:', imageData ? imageData.length : 0);
+            cachePersons.push({ name, imageData: imageData });
+            console.log('cachePersons 数组:', cachePersons.map(p => ({ name: p.name, hasImageData: !!p.imageData })));
+            renderCachePersonList();
+            
+            // 重置输入
+            cachePersonNameInput.value = '';
+            cachePersonUploadArea.querySelector('.upload-icon').textContent = '📷';
+            cachePersonUploadArea.querySelector('.upload-text').textContent = '点击上传人物照片';
+            delete cachePersonUploadArea.dataset.imageData;
+            cachePersonImageInput.value = '';
+        });
+        
+        function renderCachePersonList() {
+            cachePersonList.innerHTML = cachePersons.map((p, i) => `
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 8px 12px; border-radius: 20px; border: 2px solid #ffb74d;">
+                    ${p.imageData ? `<img src="${p.imageData}" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">` : '<span style="font-size: 20px;">👤</span>'}
+                    <span style="font-weight: 600; color: #e65100;">${p.name}</span>
+                    <button onclick="removeCachePerson(${i})" style="background: none; border: none; cursor: pointer; font-size: 16px;">❌</button>
+                </div>
+            `).join('');
+        }
+        
+        window.removeCachePerson = function(index) {
+            cachePersons.splice(index, 1);
+            renderCachePersonList();
+        };
+        
+        // 视频上传
+        cacheVideoUploadArea.addEventListener('click', () => cacheVideoInput.click());
+        cacheVideoUploadArea.addEventListener('dragover', e => { e.preventDefault(); cacheVideoUploadArea.style.borderColor = '#2196f3'; });
+        cacheVideoUploadArea.addEventListener('dragleave', () => { cacheVideoUploadArea.style.borderColor = '#64b5f6'; });
+        cacheVideoUploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            cacheVideoUploadArea.style.borderColor = '#64b5f6';
+            if (e.dataTransfer.files.length > 0) {
+                cacheVideoInput.files = e.dataTransfer.files;
+                cacheVideoInput.dispatchEvent(new Event('change'));
+            }
+        });
+        
+        cacheVideoInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                cacheSelectedVideo = this.files[0];
+                const url = URL.createObjectURL(cacheSelectedVideo);
+                cacheVideoPlayer.src = url;
+                cacheVideoPreview.style.display = 'block';
+                cacheVideoInfo.textContent = `文件: ${cacheSelectedVideo.name} | 大小: ${(cacheSelectedVideo.size / 1024 / 1024).toFixed(2)} MB`;
+                createCacheBtn.disabled = false;
+            }
+        });
+        
+        // 创建 Cache
+        createCacheBtn.addEventListener('click', async function() {
+            if (!cacheSelectedVideo) {
+                alert('请先上传视频');
+                return;
+            }
+            
+            createCacheBtn.disabled = true;
+            
+            // 根据是否有 Owner 照片显示不同的进度提示
+            if (cachePersons.length > 0 && cachePersons.some(p => p.imageData)) {
+                createCacheBtn.textContent = '⏳ 扫描人脸中...';
+            } else {
+                createCacheBtn.textContent = '⏳ 创建中...';
+            }
+            
+            const formData = new FormData();
+            formData.append('video', cacheSelectedVideo);
+            // 发送完整的 Owner 数据（包含照片）
+            const ownerDataToSend = cachePersons.map(p => ({
+                name: p.name,
+                imageData: p.imageData || null
+            }));
+            console.log('发送的 Owner 数据:', ownerDataToSend.map(o => ({ name: o.name, hasImageData: !!o.imageData, imageDataLength: o.imageData ? o.imageData.length : 0 })));
+            formData.append('owner_data', JSON.stringify(ownerDataToSend));
+            formData.append('target_fps', '2.0');
+            formData.append('base_prompt', document.getElementById('cacheBasePrompt').value.trim());
+            
+            try {
+                const response = await fetch('/api/cache/create', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentCacheId = data.cache_id;
+                    cacheIdDisplay.textContent = data.cache_id;
+                    cacheCreatedAt.textContent = data.created_at;
+                    cacheExpiresAt.textContent = data.expires_at;
+                    cacheTotalTokens.textContent = data.usage_metadata?.total_token_count || '-';
+                    
+                    // 显示人脸识别结果
+                    if (data.owner_recognition) {
+                        const recog = data.owner_recognition;
+                        
+                        // 构建详细的识别结果
+                        let recogHtml = `<strong>👤 人脸识别结果:</strong> 识别到 ${recog.recognized_count}/${recog.owners_count} 个 Owner`;
+                        
+                        // 显示每个Owner的详细状态
+                        if (recog.details && Object.keys(recog.details).length > 0) {
+                            recogHtml += '<div style="margin-top: 8px; padding: 10px; background: #f5f5f5; border-radius: 6px;">';
+                            for (const [name, detail] of Object.entries(recog.details)) {
+                                let statusIcon = '❌';
+                                let statusColor = '#d32f2f';
+                                
+                                if (detail.recognized_in_video) {
+                                    statusIcon = '✅';
+                                    statusColor = '#2e7d32';
+                                } else if (detail.face_extracted) {
+                                    statusIcon = '⚠️';
+                                    statusColor = '#f57c00';
+                                } else if (detail.has_photo) {
+                                    statusIcon = '❌';
+                                    statusColor = '#d32f2f';
+                                } else {
+                                    statusIcon = '📷';
+                                    statusColor = '#757575';
+                                }
+                                
+                                recogHtml += `<div style="margin: 4px 0; font-size: 12px;">`;
+                                recogHtml += `<span style="color: ${statusColor};">${statusIcon}</span> `;
+                                recogHtml += `<strong>${name}</strong>: ${detail.status}`;
+                                recogHtml += `</div>`;
+                            }
+                            recogHtml += '</div>';
+                        }
+                        
+                        // 添加识别结果显示
+                        let recogEl = document.getElementById('cacheRecognitionResult');
+                        if (!recogEl) {
+                            recogEl = document.createElement('div');
+                            recogEl.id = 'cacheRecognitionResult';
+                            recogEl.style.cssText = 'font-size: 13px; margin: 10px 0; color: #1565c0;';
+                            cacheStatusArea.querySelector('h5').after(recogEl);
+                        }
+                        recogEl.innerHTML = recogHtml;
+                    }
+                    
+                    cacheStatusArea.style.display = 'block';
+                    sendCacheQueryBtn.disabled = false;
+                    createCacheBtn.textContent = '✅ Cache 已创建';
+                } else {
+                    alert('创建失败: ' + data.error);
+                    createCacheBtn.disabled = false;
+                    createCacheBtn.textContent = '📦 创建 Cache';
+                }
+            } catch (error) {
+                alert('请求失败: ' + error.message);
+                createCacheBtn.disabled = false;
+                createCacheBtn.textContent = '📦 创建 Cache';
+            }
+        });
+        
+        // 删除 Cache
+        deleteCacheBtn.addEventListener('click', async function() {
+            if (!currentCacheId) return;
+            
+            if (!confirm('确定要删除此 Cache 吗？')) return;
+            
+            try {
+                const response = await fetch('/api/cache/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cache_id: currentCacheId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentCacheId = null;
+                    cacheStatusArea.style.display = 'none';
+                    sendCacheQueryBtn.disabled = true;
+                    createCacheBtn.disabled = false;
+                    createCacheBtn.textContent = '📦 创建 Cache';
+                    cacheQueryHistory = [];
+                    cacheHistoryList.innerHTML = '';
+                    alert('Cache 已删除');
+                } else {
+                    alert('删除失败: ' + data.error);
+                }
+            } catch (error) {
+                alert('请求失败: ' + error.message);
+            }
+        });
+        
+        // 发送查询
+        sendCacheQueryBtn.addEventListener('click', async function() {
+            const query = cacheQueryInput.value.trim();
+            if (!query) {
+                alert('请输入查询问题');
+                return;
+            }
+            if (!currentCacheId) {
+                alert('请先创建 Cache');
+                return;
+            }
+            
+            sendCacheQueryBtn.disabled = true;
+            sendCacheQueryBtn.textContent = '⏳ 分析中...';
+            
+            try {
+                const response = await fetch('/api/cache/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cache_id: currentCacheId,
+                        query: query
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 显示结果
+                    cacheResultContent.textContent = data.analysis;
+                    cacheResultArea.style.display = 'block';
+                    
+                    // 显示 Token 统计
+                    if (data.token_stats) {
+                        const cachedTokens = data.token_stats.cached_content_token_count || 0;
+                        const promptTokens = data.token_stats.prompt_token_count || 0;
+                        const outputTokens = data.token_stats.candidates_token_count || 0;
+                        
+                        // 计算：本次问题 Token = 总输入 - 缓存内容
+                        const newInputTokens = Math.max(0, promptTokens - cachedTokens);
+                        // 节省的 Token = 缓存内容（因为不用重复计算）
+                        const savedTokens = cachedTokens;
+                        
+                        document.getElementById('statCachedTokens').textContent = cachedTokens.toLocaleString();
+                        document.getElementById('statNewInputTokens').textContent = newInputTokens.toLocaleString();
+                        document.getElementById('statOutputTokens').textContent = outputTokens.toLocaleString();
+                        document.getElementById('statSavedTokens').textContent = savedTokens.toLocaleString();
+                        document.getElementById('statCachedTokensRef').textContent = cachedTokens.toLocaleString();
+                        document.getElementById('statNewInputTokensRef').textContent = newInputTokens.toLocaleString();
+                        cacheTokenStats.style.display = 'block';
+                    }
+                    
+                    // 添加到历史（显示实际消耗的新输入 Token）
+                    const historyNewTokens = Math.max(0, (data.token_stats?.prompt_token_count || 0) - (data.token_stats?.cached_content_token_count || 0));
+                    cacheQueryHistory.unshift({
+                        query: query,
+                        time: new Date().toLocaleTimeString(),
+                        newTokens: historyNewTokens,
+                        outputTokens: data.token_stats?.candidates_token_count || 0
+                    });
+                    renderCacheHistory();
+                    
+                    // 清空输入框
+                    cacheQueryInput.value = '';
+                } else {
+                    alert('查询失败: ' + data.error);
+                }
+            } catch (error) {
+                alert('请求失败: ' + error.message);
+            } finally {
+                sendCacheQueryBtn.disabled = false;
+                sendCacheQueryBtn.textContent = '🔍 发送查询';
+            }
+        });
+        
+        function renderCacheHistory() {
+            cacheHistoryList.innerHTML = cacheQueryHistory.map((h, i) => `
+                <div style="padding: 10px; margin-bottom: 8px; background: ${i === 0 ? '#e8f5e9' : '#f5f5f5'}; border-radius: 8px; font-size: 13px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: #666;">${h.time}</span>
+                        <span style="color: #2e7d32;">输入: ${h.newTokens} | 输出: ${h.outputTokens}</span>
+                    </div>
+                    <div style="color: #333;">${h.query.substring(0, 50)}${h.query.length > 50 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+        
+        // ==================== 陌生人检测模式 ====================
+        
+        const strangerPersonUploadArea = document.getElementById('strangerPersonUploadArea');
+        const strangerPersonImageInput = document.getElementById('strangerPersonImageInput');
+        const strangerPersonPreview = document.getElementById('strangerPersonPreview');
+        const strangerPersonNameInput = document.getElementById('strangerPersonNameInput');
+        const addStrangerPersonBtn = document.getElementById('addStrangerPersonBtn');
+        const strangerPersonsList = document.getElementById('strangerPersonsList');
+        const strangerPersonCount = document.getElementById('strangerPersonCount');
+        const strangerVideoUploadArea = document.getElementById('strangerVideoUploadArea');
+        const strangerVideoInput = document.getElementById('strangerVideoInput');
+        const strangerVideoPreviewContainer = document.getElementById('strangerVideoPreviewContainer');
+        const strangerVideoPreview = document.getElementById('strangerVideoPreview');
+        const strangerVideoInfo = document.getElementById('strangerVideoInfo');
+        const startStrangerAnalyzeBtn = document.getElementById('startStrangerAnalyzeBtn');
+        const strangerProgressSection = document.getElementById('strangerProgressSection');
+        const strangerProgressBar = document.getElementById('strangerProgressBar');
+        const strangerProgressText = document.getElementById('strangerProgressText');
+        const strangerResultSection = document.getElementById('strangerResultSection');
+        const strangerCacheStatusSection = document.getElementById('strangerCacheStatusSection');
+        const deleteStrangerCacheBtn = document.getElementById('deleteStrangerCacheBtn');
+        
+        let strangerOwners = [];
+        let strangerSelectedImageData = null;
+        let strangerSelectedVideo = null;
+        let strangerCacheId = null;
+        
+        // 户主照片上传
+        strangerPersonUploadArea.addEventListener('click', () => strangerPersonImageInput.click());
+        
+        strangerPersonImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    strangerSelectedImageData = e.target.result;
+                    strangerPersonPreview.src = strangerSelectedImageData;
+                    strangerPersonPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 添加户主
+        addStrangerPersonBtn.addEventListener('click', function() {
+            const name = strangerPersonNameInput.value.trim();
+            if (!name) {
+                alert('请输入户主名称');
+                return;
+            }
+            if (!strangerSelectedImageData) {
+                alert('请先上传户主照片');
+                return;
+            }
+            if (strangerOwners.some(o => o.name === name)) {
+                alert('该名称已存在');
+                return;
+            }
+            
+            strangerOwners.push({ name, imageData: strangerSelectedImageData });
+            renderStrangerOwnersList();
+            
+            // 重置
+            strangerPersonNameInput.value = '';
+            strangerSelectedImageData = null;
+            strangerPersonPreview.style.display = 'none';
+            strangerPersonImageInput.value = '';
+            
+            updateStartStrangerBtn();
+        });
+        
+        function renderStrangerOwnersList() {
+            strangerPersonCount.textContent = strangerOwners.length;
+            if (strangerOwners.length === 0) {
+                strangerPersonsList.innerHTML = '<p class="no-persons-text">暂未添加户主照片</p>';
+            } else {
+                strangerPersonsList.innerHTML = strangerOwners.map((o, i) => `
+                    <div class="person-item" style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #fff3e0; border-radius: 8px; margin-bottom: 6px; border: 2px solid #ff9800;">
+                        <img src="${o.imageData}" alt="${o.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid #ff9800;">
+                        <span style="flex: 1; font-weight: 500; color: #e65100;">${o.name}</span>
+                        <button onclick="removeStrangerOwner(${i})" style="background: #ff5252; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px;">×</button>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        window.removeStrangerOwner = function(index) {
+            strangerOwners.splice(index, 1);
+            renderStrangerOwnersList();
+            updateStartStrangerBtn();
+        };
+        
+        // 视频上传
+        strangerVideoUploadArea.addEventListener('click', () => strangerVideoInput.click());
+        strangerVideoUploadArea.addEventListener('dragover', e => { e.preventDefault(); strangerVideoUploadArea.style.borderColor = '#1565c0'; });
+        strangerVideoUploadArea.addEventListener('dragleave', () => { strangerVideoUploadArea.style.borderColor = '#2196f3'; });
+        strangerVideoUploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            strangerVideoUploadArea.style.borderColor = '#2196f3';
+            if (e.dataTransfer.files.length > 0) handleStrangerVideo(e.dataTransfer.files[0]);
+        });
+        
+        strangerVideoInput.addEventListener('change', function() {
+            if (this.files[0]) handleStrangerVideo(this.files[0]);
+        });
+        
+        function handleStrangerVideo(file) {
+            if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|webm|mov|avi|ts)$/i)) {
+                alert('请选择视频文件');
+                return;
+            }
+            strangerSelectedVideo = file;
+            strangerVideoPreview.src = URL.createObjectURL(file);
+            strangerVideoPreviewContainer.style.display = 'block';
+            strangerVideoInfo.textContent = `${file.name} | ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            strangerVideoUploadArea.style.display = 'none';
+            updateStartStrangerBtn();
+        }
+        
+        function updateStartStrangerBtn() {
+            startStrangerAnalyzeBtn.disabled = !(strangerOwners.length > 0 && strangerSelectedVideo);
+        }
+        
+        // 开始陌生人检测
+        startStrangerAnalyzeBtn.addEventListener('click', async function() {
+            if (strangerOwners.length === 0 || !strangerSelectedVideo) return;
+            
+            const mode = document.querySelector('input[name="strangerAnalyzeMode"]:checked').value;
+            const prompt = document.getElementById('strangerPromptInput').value.trim();
+            
+            startStrangerAnalyzeBtn.disabled = true;
+            startStrangerAnalyzeBtn.textContent = '🔄 分析中...';
+            strangerProgressSection.style.display = 'block';
+            strangerResultSection.style.display = 'none';
+            strangerProgressBar.style.width = '10%';
+            strangerProgressText.textContent = '正在上传数据...';
+            
+            try {
+                if (mode === 'direct') {
+                    await analyzeStrangerDirect(prompt);
+                } else {
+                    await analyzeStrangerWithCache(prompt);
+                }
+            } catch (error) {
+                alert('分析失败: ' + error.message);
+                strangerProgressText.textContent = '分析失败';
+            } finally {
+                startStrangerAnalyzeBtn.disabled = false;
+                startStrangerAnalyzeBtn.textContent = '🔍 开始陌生人检测';
+                updateStartStrangerBtn();
+            }
+        });
+        
+        // 直接分析模式
+        async function analyzeStrangerDirect(prompt) {
+            strangerProgressBar.style.width = '30%';
+            strangerProgressText.textContent = '正在发送视频和户主照片...';
+            
+            const formData = new FormData();
+            formData.append('video', strangerSelectedVideo);
+            formData.append('owners', JSON.stringify(strangerOwners));
+            formData.append('prompt', prompt);
+            formData.append('media_resolution', mediaResolutionSelect.value);
+            
+            strangerProgressBar.style.width = '50%';
+            strangerProgressText.textContent = 'Gemini 分析中...';
+            
+            const response = await fetch('/api/stranger/analyze', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            strangerProgressBar.style.width = '100%';
+            strangerProgressText.textContent = '分析完成!';
+            
+            if (data.success) {
+                displayStrangerResult(data);
+            } else {
+                throw new Error(data.error || '分析失败');
+            }
+        }
+        
+        // Cache 模式分析
+        async function analyzeStrangerWithCache(prompt) {
+            // 如果没有 Cache，先创建
+            if (!strangerCacheId) {
+                strangerProgressBar.style.width = '20%';
+                strangerProgressText.textContent = '正在创建 Cache...';
+                
+                const createFormData = new FormData();
+                createFormData.append('owners', JSON.stringify(strangerOwners));
+                createFormData.append('prompt', prompt);
+                createFormData.append('model_id', modelSelect.value);
+                
+                const createResponse = await fetch('/api/stranger/create_cache', {
+                    method: 'POST',
+                    body: createFormData
+                });
+                
+                const createData = await createResponse.json();
+                
+                if (!createData.success) {
+                    throw new Error(createData.error || 'Cache 创建失败');
+                }
+                
+                strangerCacheId = createData.cache_id;
+                document.getElementById('strangerCacheId').textContent = createData.cache_id;
+                document.getElementById('strangerCacheOwnerCount').textContent = createData.owner_count;
+                document.getElementById('strangerCacheExpires').textContent = createData.expires_at;
+                strangerCacheStatusSection.style.display = 'block';
+            }
+            
+            // 使用 Cache 查询
+            strangerProgressBar.style.width = '50%';
+            strangerProgressText.textContent = '使用 Cache 分析视频...';
+            
+            const queryFormData = new FormData();
+            queryFormData.append('cache_id', strangerCacheId);
+            queryFormData.append('video', strangerSelectedVideo);
+            queryFormData.append('query', prompt || '请分析这个视频中是否有陌生人。');
+            queryFormData.append('media_resolution', mediaResolutionSelect.value);
+            
+            const queryResponse = await fetch('/api/stranger/query_with_cache', {
+                method: 'POST',
+                body: queryFormData
+            });
+            
+            const queryData = await queryResponse.json();
+            
+            strangerProgressBar.style.width = '100%';
+            strangerProgressText.textContent = '分析完成!';
+            
+            if (queryData.success) {
+                displayStrangerResult(queryData);
+            } else {
+                throw new Error(queryData.error || '查询失败');
+            }
+        }
+        
+        // 显示检测结果
+        function displayStrangerResult(data) {
+            strangerResultSection.style.display = 'block';
+            
+            // 警告框
+            const alertBox = document.getElementById('strangerAlertBox');
+            const alertText = document.getElementById('strangerAlertText');
+            
+            if (data.has_stranger) {
+                alertBox.style.background = 'linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%)';
+                alertBox.style.border = '2px solid #f44336';
+                alertText.style.color = '#c62828';
+                alertText.innerHTML = '⚠️ 发现陌生人！';
+            } else {
+                alertBox.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
+                alertBox.style.border = '2px solid #4caf50';
+                alertText.style.color = '#2e7d32';
+                alertText.innerHTML = '✅ 安全 - 未发现陌生人';
+            }
+            
+            // Token 统计
+            if (data.token_stats) {
+                document.getElementById('strangerInputTokens').textContent = data.token_stats.input_tokens || data.token_stats.prompt_token_count || '-';
+                document.getElementById('strangerOutputTokens').textContent = data.token_stats.output_tokens || data.token_stats.candidates_token_count || '-';
+            }
+            document.getElementById('strangerProcessingTime').textContent = (data.processing_time || '-') + 's';
+            
+            // 详细 Token 信息
+            if (data.token_details) {
+                const details = data.token_details;
+                const promptDetails = details.prompt_tokens_details || {};
+                const candidatesDetails = details.candidates_tokens_details || {};
+                
+                // Input tokens 详情
+                document.getElementById('strangerInputTextTokens').textContent = promptDetails.text_tokens || 0;
+                document.getElementById('strangerInputImageTokens').textContent = promptDetails.image_tokens || 0;
+                document.getElementById('strangerInputVideoTokens').textContent = promptDetails.video_tokens || 0;
+                document.getElementById('strangerInputAudioTokens').textContent = promptDetails.audio_tokens || 0;
+                
+                // Output tokens 详情
+                document.getElementById('strangerOutputTextTokens').textContent = candidatesDetails.text_tokens || 0;
+                document.getElementById('strangerThinkingTokens').textContent = candidatesDetails.thinking_tokens || 0;
+                
+                // 缓存 tokens
+                document.getElementById('strangerCachedTokens').textContent = details.cached_content_token_count || 0;
+                
+                document.getElementById('strangerTokenDetailsSection').style.display = 'block';
+            } else {
+                document.getElementById('strangerTokenDetailsSection').style.display = 'none';
+            }
+            
+            // 分析内容
+            document.getElementById('strangerAnalysisContent').textContent = data.analysis || '无分析结果';
+        }
+        
+        // 删除 Cache
+        deleteStrangerCacheBtn.addEventListener('click', async function() {
+            if (!strangerCacheId) return;
+            
+            if (!confirm('确定要删除 Cache 吗？')) return;
+            
+            try {
+                const response = await fetch('/api/stranger/delete_cache', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cache_id: strangerCacheId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    strangerCacheId = null;
+                    strangerCacheStatusSection.style.display = 'none';
+                    alert('Cache 已删除');
+                } else {
+                    alert('删除失败: ' + data.error);
+                }
+            } catch (error) {
+                alert('请求失败: ' + error.message);
+            }
+        });
+        
+        // 隐藏陌生人检测模式的通用提示词和按钮
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                if (this.dataset.mode === 'stranger') {
+                    document.querySelector('.prompt-section').style.display = 'none';
+                    document.getElementById('submitBtn').style.display = 'none';
+                    document.getElementById('submitLangchainBtn').style.display = 'none';
+                    document.getElementById('resultSection').style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
