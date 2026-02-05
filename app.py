@@ -86,7 +86,7 @@ if LANGCHAIN_AVAILABLE:
             return await super().ainvoke(input, config, stop=stop, **kwargs)
 
 # 配置
-PROJECT_ID = "cloud-llm-preview2"
+PROJECT_ID = "deep-sphere-463507-c3"
 LOCATION = "us-central1"
 LOCATION_GLOBAL = "global"
 DEFAULT_MODEL_ID = "gemini-2.5-flash-lite"

@@ -1,0 +1,11 @@
+*.so
+*.egg
+*.egg-info
+dist
+build
+venv
+Video
+testforTP/
+app.log
+__pycache__/
+*.pyc
