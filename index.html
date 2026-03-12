@@ -1451,6 +1451,8 @@
                 <option value="gemini-2.0-flash-lite-001">Gemini 2.0 Flash Lite</option>
                 <option value="gemini-3-pro-preview">Gemini 3 Pro Preview</option>
                 <option value="gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+                <option value="gemini-3.1-pro-preview">Gemini 3.1 Pro Preview</option>
+                <option value="gemini-3.1-flash-lite-preview">Gemini 3.1 Flash Lite Preview</option>
             </select>
         </div>
         
@@ -1471,10 +1473,30 @@
                 </div>
             </div>
             
+            <!-- Thinking Level -->
+            <div class="settings-row" style="margin-top: 15px;">
+                <div class="input-group">
+                    <label for="thinkingLevelSelect">🧠 思考级别:</label>
+                    <select id="thinkingLevelSelect" style="width: 200px;">
+                        <option value="none">关闭 (Off)</option>
+                        <option value="1024">低 (Low - 1024)</option>
+                        <option value="8192">中 (Medium - 8192)</option>
+                        <option value="24576">高 (High - 24576)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="temperatureInput">🌡️ Temperature:</label>
+                    <input type="number" id="temperatureInput" value="0.4" min="0" max="2" step="0.1" style="width: 80px;">
+                    <span>(0 - 2.0)</span>
+                </div>
+            </div>
+            
             <p class="settings-info" id="mediaResolutionInfo">
                 💡 <strong>分辨率设置</strong>: 影响图片/视频的处理精度和 token 消耗。<br>
                 📊 视频: Low ~100 tokens/秒，默认 ~300 tokens/秒。<br>
-                🖼️ 图片: 低分辨率可减少 token 消耗，高分辨率可获得更多细节。
+                🖼️ 图片: 低分辨率可减少 token 消耗，高分辨率可获得更多细节。<br>
+                🧠 <strong>思考级别</strong>: 控制模型的 thinking budget，更高级别消耗更多 tokens 但推理更深入。<br>
+                🌡️ <strong>Temperature</strong>: 控制生成的随机性，0 最确定，2.0 最随机，默认 0.4。
             </p>
         </div>
         
@@ -2946,6 +2968,15 @@
             // 添加 media_resolution 参数（所有模型都支持）
             formData.append('media_resolution', mediaResolutionSelect.value);
             
+            // 添加 thinking_budget 参数
+            const thinkingLevel = document.getElementById('thinkingLevelSelect').value;
+            if (thinkingLevel !== 'none') {
+                formData.append('thinking_budget', thinkingLevel);
+            }
+            
+            // 添加 temperature 参数
+            formData.append('temperature', document.getElementById('temperatureInput').value);
+            
             const targetWidth = parseInt(widthInput.value);
             const targetHeight = parseInt(heightInput.value);
             
@@ -2991,6 +3022,15 @@
             formData.append('model_id', modelSelect.value);
             
             // 添加视频高级设置参数（直接发送视频模式）
+            // 添加 thinking_budget 参数
+            const videoThinkingLevel = document.getElementById('thinkingLevelSelect').value;
+            if (videoThinkingLevel !== 'none') {
+                formData.append('thinking_budget', videoThinkingLevel);
+            }
+            
+            // 添加 temperature 参数
+            formData.append('temperature', document.getElementById('temperatureInput').value);
+            
             if (videoMode === 'direct') {
                 formData.append('media_resolution', mediaResolutionSelect.value);
                 

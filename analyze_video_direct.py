@@ -10,7 +10,7 @@ from google import genai
 from google.genai import types
 
 # 配置
-PROJECT_ID = "cloud-llm-preview1"
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "")
 LOCATION = "us-central1"
 MODEL_ID = "gemini-2.5-flash"
 VIDEO_PATH = "1.ts"

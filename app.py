@@ -86,7 +86,7 @@ if LANGCHAIN_AVAILABLE:
             return await super().ainvoke(input, config, stop=stop, **kwargs)
 
 # 配置
-PROJECT_ID = "deep-sphere-463507-c3"
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "")
 LOCATION = "us-central1"
 LOCATION_GLOBAL = "global"
 DEFAULT_MODEL_ID = "gemini-2.5-flash-lite"
@@ -103,7 +103,9 @@ AVAILABLE_MODELS = {
     "gemini-2.5-flash-lite": "Gemini 2.5 Flash Lite",
     "gemini-2.0-flash-lite-001": "Gemini 2.0 Flash Lite",
     "gemini-3-pro-preview": "Gemini 3 Pro Preview",
-    "gemini-3-flash-preview": "Gemini 3 Flash Preview"
+    "gemini-3-flash-preview": "Gemini 3 Flash Preview",
+    "gemini-3.1-pro-preview": "Gemini 3.1 Pro Preview",
+    "gemini-3.1-flash-lite-preview": "Gemini 3.1 Flash Lite Preview"
 }
 
 # 图片最大尺寸限制
@@ -176,24 +178,24 @@ MEDIA_RESOLUTION_MAP = {
 }
 
 
-def analyze_image_with_gemini(image_bytes: bytes, prompt: str, mime_type: str, model_id: str = None, media_resolution: str = None) -> dict:
+def analyze_image_with_gemini(image_bytes: bytes, prompt: str, mime_type: str, model_id: str = None, media_resolution: str = None, thinking_budget: int = None, temperature: float = 0.4) -> dict:
     """使用 Gemini 模型分析图片"""
     global client
     
     try:
         model_id = model_id or DEFAULT_MODEL_ID
         
-        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview"]:
+        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-3.1-pro-preview", "gemini-3.1-flash-lite-preview"]:
             current_client = genai.Client(vertexai=True, project=PROJECT_ID, location=LOCATION_GLOBAL)
         else:
             current_client = client
         
         image_part = types.Part.from_bytes(data=image_bytes, mime_type=mime_type)
         
-        config_params = {"max_output_tokens": 2048, "temperature": 0.4}
+        config_params = {"max_output_tokens": 2048, "temperature": temperature}
         
-        if model_id == "gemini-2.5-flash-lite":
-            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        if thinking_budget is not None:
+            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=thinking_budget)
         
         if media_resolution and media_resolution in MEDIA_RESOLUTION_MAP:
             config_params["media_resolution"] = MEDIA_RESOLUTION_MAP[media_resolution]
@@ -274,7 +276,23 @@ def analyze():
         
         media_resolution = request.form.get('media_resolution', None)
         
-        result = analyze_image_with_gemini(processed_bytes, prompt, mime_type, model_id, media_resolution)
+        # 获取 thinking_budget 参数
+        thinking_budget_str = request.form.get('thinking_budget', None)
+        thinking_budget = None
+        if thinking_budget_str is not None:
+            try:
+                thinking_budget = int(thinking_budget_str)
+            except ValueError:
+                thinking_budget = None
+        
+        # 获取 temperature 参数
+        temperature_str = request.form.get('temperature', '0.4')
+        try:
+            temperature = float(temperature_str)
+        except ValueError:
+            temperature = 0.4
+        
+        result = analyze_image_with_gemini(processed_bytes, prompt, mime_type, model_id, media_resolution, thinking_budget, temperature)
         
         if result['success']:
             processed_image_base64 = base64.b64encode(processed_bytes).decode('utf-8')
@@ -622,7 +640,8 @@ def extract_frames_from_video(video_path: str, fps: float = 1.0, max_frames: int
 def analyze_video_direct_with_gemini(video_bytes: bytes, prompt: str, mime_type: str, 
                                       model_id: str = None, media_resolution: str = None,
                                       video_fps: float = None, start_offset: str = None, 
-                                      end_offset: str = None) -> dict:
+                                      end_offset: str = None, thinking_budget: int = None,
+                                      temperature: float = 0.4) -> dict:
     """
     直接发送视频给 Gemini 进行分析
     """
@@ -639,7 +658,7 @@ def analyze_video_direct_with_gemini(video_bytes: bytes, prompt: str, mime_type:
         logger.info(f"[Video Direct] video_fps: {video_fps}")
         logger.info(f"[Video Direct] start_offset: {start_offset}, end_offset: {end_offset}")
         
-        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview"]:
+        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-3.1-pro-preview", "gemini-3.1-flash-lite-preview"]:
             current_client = genai.Client(vertexai=True, project=PROJECT_ID, location=LOCATION_GLOBAL)
         else:
             current_client = client
@@ -647,29 +666,33 @@ def analyze_video_direct_with_gemini(video_bytes: bytes, prompt: str, mime_type:
         # 创建视频部分
         video_part = types.Part.from_bytes(data=video_bytes, mime_type=mime_type)
         
-        # 如果有时间裁剪参数，使用 video_metadata
-        if start_offset or end_offset:
-            video_metadata = {}
+        # 如果有 video_fps、时间裁剪参数，使用 video_metadata
+        if video_fps or start_offset or end_offset:
+            video_metadata_params = {}
+            
+            # 设置采样帧率 (fps)
+            if video_fps and video_fps > 0:
+                video_metadata_params['fps'] = video_fps
+                logger.info(f"[Video Direct] 设置 VideoMetadata fps={video_fps}")
+            
             if start_offset:
                 # 解析 start_offset (格式: "Xs" 或 "X")
                 start_sec = float(start_offset.rstrip('s')) if start_offset else 0
-                video_metadata['start_offset'] = f"{start_sec}s"
+                video_metadata_params['start_offset'] = f"{start_sec}s"
             if end_offset:
                 end_sec = float(end_offset.rstrip('s')) if end_offset else None
                 if end_sec:
-                    video_metadata['end_offset'] = f"{end_sec}s"
+                    video_metadata_params['end_offset'] = f"{end_sec}s"
             
-            if video_metadata:
-                video_part.video_metadata = types.VideoMetadata(**{
-                    k: v for k, v in video_metadata.items()
-                }) if hasattr(types, 'VideoMetadata') else None
-                logger.info(f"[Video Direct] video_metadata: {video_metadata}")
+            if video_metadata_params and hasattr(types, 'VideoMetadata'):
+                video_part.video_metadata = types.VideoMetadata(**video_metadata_params)
+                logger.info(f"[Video Direct] video_metadata: {video_metadata_params}")
         
         # 配置参数
-        config_params = {"max_output_tokens": 4096, "temperature": 0.4}
+        config_params = {"max_output_tokens": 4096, "temperature": temperature}
         
-        if model_id == "gemini-2.5-flash-lite":
-            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        if thinking_budget is not None:
+            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=thinking_budget)
         
         if media_resolution and media_resolution in MEDIA_RESOLUTION_MAP:
             config_params["media_resolution"] = MEDIA_RESOLUTION_MAP[media_resolution]
@@ -706,7 +729,8 @@ def analyze_video_direct_with_gemini(video_bytes: bytes, prompt: str, mime_type:
 
 
 def analyze_video_frames_with_gemini(frames: list, prompt: str, model_id: str = None, 
-                                      media_resolution: str = None) -> dict:
+                                      media_resolution: str = None, thinking_budget: int = None,
+                                      temperature: float = 0.4) -> dict:
     """
     发送提取的视频帧给 Gemini 进行分析
     """
@@ -718,7 +742,7 @@ def analyze_video_frames_with_gemini(frames: list, prompt: str, model_id: str = 
         
         logger.info(f"[Video Frames] 开始帧分析，帧数: {len(frames)}")
         
-        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview"]:
+        if model_id in ["gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-3.1-pro-preview", "gemini-3.1-flash-lite-preview"]:
             current_client = genai.Client(vertexai=True, project=PROJECT_ID, location=LOCATION_GLOBAL)
         else:
             current_client = client
@@ -731,10 +755,10 @@ def analyze_video_frames_with_gemini(frames: list, prompt: str, model_id: str = 
         contents.append(f"这是从视频中提取的 {len(frames)} 帧图片。{prompt}")
         
         # 配置参数
-        config_params = {"max_output_tokens": 4096, "temperature": 0.4}
+        config_params = {"max_output_tokens": 4096, "temperature": temperature}
         
-        if model_id == "gemini-2.5-flash-lite":
-            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        if thinking_budget is not None:
+            config_params["thinking_config"] = types.ThinkingConfig(thinking_budget=thinking_budget)
         
         if media_resolution and media_resolution in MEDIA_RESOLUTION_MAP:
             config_params["media_resolution"] = MEDIA_RESOLUTION_MAP[media_resolution]
@@ -843,6 +867,22 @@ def analyze_video():
         model_id = request.form.get('model_id', DEFAULT_MODEL_ID)
         media_resolution = request.form.get('media_resolution', None)
         
+        # 获取 thinking_budget 参数
+        thinking_budget_str = request.form.get('thinking_budget', None)
+        thinking_budget = None
+        if thinking_budget_str is not None:
+            try:
+                thinking_budget = int(thinking_budget_str)
+            except ValueError:
+                thinking_budget = None
+        
+        # 获取 temperature 参数
+        temperature_str = request.form.get('temperature', '0.4')
+        try:
+            temperature = float(temperature_str)
+        except ValueError:
+            temperature = 0.4
+        
         if model_id not in AVAILABLE_MODELS:
             model_id = DEFAULT_MODEL_ID
         
@@ -925,7 +965,7 @@ def analyze_video():
                 
                 result = analyze_video_direct_with_gemini(
                     video_bytes_to_send, prompt, mime_type, model_id, media_resolution,
-                    video_fps, start_offset, end_offset
+                    video_fps, start_offset, end_offset, thinking_budget, temperature
                 )
                 
                 if result['success']:
@@ -993,7 +1033,7 @@ def analyze_video():
                 if frame_width or frame_height:
                     video_info['frame_size'] = f"{frame_width or 'auto'}x{frame_height or 'auto'}"
                 
-                result = analyze_video_frames_with_gemini(frames, prompt, model_id, media_resolution)
+                result = analyze_video_frames_with_gemini(frames, prompt, model_id, media_resolution, thinking_budget, temperature)
                 
                 if result['success']:
                     # 准备帧预览（前6帧）

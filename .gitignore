@@ -9,3 +9,7 @@ testforTP/
 app.log
 __pycache__/
 *.pyc
+
+# Output and log files (may contain project IDs or sensitive info)
+*_output.txt
+*_results.csv
